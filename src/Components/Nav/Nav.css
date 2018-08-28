@@ -1,0 +1,11 @@
+.navBar {
+    height: 10vh;
+    width: 100vw;
+    background: lightslategray;
+    text-align: center;
+    padding: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+}
