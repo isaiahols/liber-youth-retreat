@@ -5,6 +5,7 @@ const session = require('express-session');
 const axios = require('axios')
 
 const rc = require('./Controllers/register_controller');
+const ac = require('./Controllers/auth_controller')
 const aw = require('./Middleware/auth_middleware')
 
 // // //Declarations// // //
@@ -41,7 +42,13 @@ app.get('/api/session-info', rc.giveSessionData);
 
 
 // writing to db while registering
-app.post('/api/register/part1', rc.registerPart1);
+// app.post('/api/register/part1', rc.registerPart1);
+
+app.post('/api/register/participant')
+app.post('/api/register/guardian')
+app.post('/api/register/emergency')
+app.post('/api/register/attend')
+app.put('/api/register/participants/:g_id/:e_id/:a_id')
 
 
 
@@ -52,11 +59,16 @@ app.post('/api/register/part1', rc.registerPart1);
 
 
 
+// authentication //
+
+app.get('/auth/callback', ac.login);
+
+app.get('/api/user-data', aw.envCheck, ac.userData)
+
+app.get('/auth/logout', ac.logout)
 
 
-// auth0 //
 
-app.get('/auth/callback', aw.login);
 
 
 

@@ -29,19 +29,9 @@ CREATE TABLE "legal_docs"
 CREATE TABLE "camps"
 (
     "camp_id" serial primary key,
-    "Start date" date,
-    "End date" date,
-    "Description" text
-);
-
-
-CREATE TABLE "attendents"
-(
-    "attendee_id" serial primary key,
-    "group" varchar(120),
-    "waver_signed" integer,
-    "register_date" date not null default current_date,
-    "camp_id" integer references camps(camp_id)
+    "start_date" date,
+    "end_date" date,
+    "description" text
 );
 
 CREATE TABLE "guardians"
@@ -72,8 +62,17 @@ CREATE TABLE "participants"
     "order_books" varchar(20),
     "display_profile" integer,
     "guardian_id" integer references guardians(guardian_id),
-    "user_id" integer references users(user_id),
-    "attendee_id" integer references attendents(attendee_id)
+    "user_id" integer references users(user_id)
+);
+
+CREATE TABLE "attendents"
+(
+    "attendee_id" serial primary key,
+    "group" varchar(120),
+    "waver_signed" integer,
+    "register_date" date not null default current_date,
+    "camp_id" integer references camps(camp_id),
+    "participant_id" integer references participants(participant_id)
 );
 
 CREATE TABLE "emergency_contacts"
@@ -118,4 +117,12 @@ CREATE TABLE "mailing_list"
 
 
 
+insert into camps
+    (start_date, end_date, description)
+values
+    ('2018-08-19', '2018-08-21', 'great camp for learning'),
+    ('2018-08-22', '2018-08-25', 'great camp about education');
 
+
+select *
+from camps;
