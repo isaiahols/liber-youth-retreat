@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 
 export default class Part2 extends Component {
     render() {
@@ -8,19 +9,19 @@ export default class Part2 extends Component {
                     <h1>More Details</h1>
                 </section>
                 <section>
-                    <h1>A Few More Things</h1>
-                    <h2>Upload a Photo</h2>
+                    <h2>A Few More Things</h2>
+                    <h3>Upload a Photo</h3>
                     <div className="photoUploader">
                         {/* This is where React S3 Uploader */}
                     </div>
                     <div className="shirtSize">
-                        <h2>T-Shirt size</h2>
+                        <h3>T-Shirt size</h3>
                         {/* All have an onClick */}
-                        <h3>XS</h3>
-                        <h3>S</h3>
-                        <h3>M</h3>
-                        <h3>L</h3>
-                        <h3>XL</h3>
+                        <h4>XS</h4>
+                        <h4>S</h4>
+                        <h4>M</h4>
+                        <h4>L</h4>
+                        <h4>XL</h4>
                     </div>
                     <div>
                         <h2>Order Books Now</h2>
@@ -48,9 +49,15 @@ export default class Part2 extends Component {
                     <textarea name="Comments" id="" cols="30" rows="10"></textarea>
                 </div>
                 <div>
-                    <button>Save and Continue</button>
-                    <button>Back</button>
-                    <button>Cancel</button>
+                    <Link to="/user/register/3">
+                        <button>Save and Continue</button>
+                    </Link>
+                    <Link to='/user/register/1' >
+                        <button>Back</button>
+                    </Link>
+                    <Link to='/user/dashboard' >
+                        <button>Cancel</button>
+                    </Link>
                 </div>
             </div>
         )

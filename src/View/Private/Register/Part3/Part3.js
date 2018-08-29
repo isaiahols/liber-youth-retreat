@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
 
 export default class Part3 extends Component {
     render() {
@@ -6,6 +7,10 @@ export default class Part3 extends Component {
             <div>
                 <section>
                     <h1>Guardian</h1>
+                </section>
+                <section>
+                    <h2>Select a Saved Guardian</h2>
+                    {/* use guardian tile builder here */}
                 </section>
                 <section>
                     <div>
@@ -20,13 +25,19 @@ export default class Part3 extends Component {
                         <input type="text" />
                         <h3>Other Phone</h3>
                         <input type="text" />
-
                     </div>
                 </section>
                 <div>
-                    <button>Save and Continue</button>
-                    <button>Back</button>
-                    <button>Cancel</button>
+                    <Link to="/user/register/4">
+                        <button>Save and Continue</button>
+                    </Link>
+                    {/* this will either post or put depending on if it was auto filled */}
+                    <Link to='/user/register/2' >
+                        <button>Back</button>
+                    </Link>
+                    <Link to='/user/dashboard' >
+                        <button>Cancel</button>
+                    </Link>
                 </div>
             </div>
         )

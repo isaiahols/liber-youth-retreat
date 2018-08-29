@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
+import { testerThing } from "../../../../Ducks/registration";
+import { connect } from "react-redux";
 
-export default class Part1 extends Component {
+class Part1 extends Component {
+
+
+    updateThing(){
+        this.props.testerThing(['thing',1232])
+    }
+
     render() {
         return (
             <div>
+                <h1>{this.props.test.thing}</h1>
+                <h1>{this.props.test.stuff}</h1>
+                <button onClick={()=>this.updateThing()} >Click Me</button>
                 <section>
                     <h1>Begin Registration</h1>
                 </section>
@@ -38,11 +50,21 @@ export default class Part1 extends Component {
                         </div>
                     </div>
                     <div>
-                        <button>Save and Continue</button>
-                        <button>Cancel</button>
+                        <Link to="/user/register/2">
+                            <button>Save and Continue</button>
+                        </Link>
+                        <Link to='/user/dashboard' >
+                            <button>Cancel</button>
+                        </Link>
                     </div>
                 </section>
             </div>
         )
     }
 }
+
+function mapStateToProps({ test }) {
+    return { test }
+}
+
+export default connect(mapStateToProps,{testerThing})(Part1)
