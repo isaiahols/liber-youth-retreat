@@ -44,7 +44,7 @@ module.exports = {
         if (foundUser[0]) {
             // if user exists set user to sessions
             req.session.user = foundUser[0];
-            res.redirect('/#/legal')
+            res.redirect('/#/user/dashboard')
         } else {
             // check for admin
             let adminCheck = adminList.find(adm => adm.email === email);
@@ -53,9 +53,9 @@ module.exports = {
             // create new user with info from 
             let createdUser = await db.create_user(name, email, picture, sub, admin)
             req.session.user = createdUser[0];
-            res.redirect('/#/about')
+            res.redirect('/#/user/dashboard')
         }
-
+        console.log(req.session)
     },
     userData: (req, res) => {
         // checking if user is signed in

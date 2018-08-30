@@ -1,5 +1,20 @@
 let initialState = {
-    participant: {},
+    participant: {
+        first_name: '',
+        last_name: '',
+        birthday: '',
+        email: '',
+        gender: '',
+        photo: '',
+        size: '',
+        health_card_num: '',
+        dietary_concerns: '',
+        medical_concerns: '',
+        comments: '',
+        email_updates: true,
+        order_books: true,
+        display_profile: true,
+    },
     guardian: {},
     emergency: {},
     user: {},
@@ -16,15 +31,20 @@ let initialState = {
 // // // REDUCER // // //
 export default (state = initialState, action) => {
     const { payload } = action
+    let newState = JSON.parse(JSON.stringify(state))
     switch (action.type) {
-        case TEST_THING:
-            const { what, val } = payload
-            let obj = JSON.parse(JSON.stringify(state))
-            obj.test[what] = val;
-            return obj
+        // case TEST_THING:
+        //     const { what, val } = payload
+        //     let obj = JSON.parse(JSON.stringify(state))
+        //     obj.test[what] = val;
+        //     return obj
         case UPDATE_USER:
             return Object.assign({}, state, { user: payload })
-            
+        case UPDATE_PARTICIPANT:
+            const { what, val } = payload;
+            newState.participant[what] = val
+            return newState;
+
         default:
             return state;
     }
@@ -43,7 +63,29 @@ const TEST_THING = 'TEST_THING';
 
 
 
-// // // ACTION BUILDERS // // //
+// // // ACTION CREATORS // // //
+export const updateParticipant = (instructions) => {
+    // instructions must be {what: input, val: input1}
+    return {
+        type: UPDATE_PARTICIPANT,
+        payload: instructions
+    }
+}
+
+export function updateUser(user) {
+    return {
+        type: UPDATE_USER,
+        payload: user
+    }
+}
+
+// // // Action Functions // // //
+
+
+
+
+// testing //
+
 export function testerThing(things) {
     return {
         type: TEST_THING,
@@ -53,13 +95,3 @@ export function testerThing(things) {
         }
     }
 }
-
-
-export function updateUser(user) {
-    return {
-        type: UPDATE_USER,
-        payload: user
-    }
-}
-
-

@@ -2,9 +2,9 @@ drop table if exists mailing_list;
 drop table if exists participant_emergency;
 drop table if exists feedback;
 drop table if exists emergency_contacts;
+drop table if exists attendents;
 drop table if exists participants;
 drop table if exists guardians;
-drop table if exists attendents;
 drop table if exists camps;
 drop table if exists legal_docs;
 drop table if exists users;
@@ -51,16 +51,16 @@ CREATE TABLE "participants"
     "last_name" varchar(80),
     "birthdate" date,
     "gender" varchar(20),
-    "participant_email" varchar(120),
-    "t_shirt_size" varchar(20),
+    "email" varchar(120),
+    "size" varchar(20),
     "health_card_num" varchar(30),
-    "participant_photo" text,
+    "photo" text,
     "dietary_concerns" text,
     "medical_concerns" text,
     "comments" text,
-    "email_updates" integer,
-    "order_books" varchar(20),
-    "display_profile" integer,
+    "email_updates" boolean,
+    "order_books" boolean,
+    "display_profile" boolean,
     "guardian_id" integer references guardians(guardian_id),
     "user_id" integer references users(user_id)
 );
@@ -69,7 +69,9 @@ CREATE TABLE "attendents"
 (
     "attendee_id" serial primary key,
     "group" varchar(120),
-    "waver_signed" integer,
+    "waver_P_signed" boolean,
+    "waver_Y_signed" boolean,
+    "medical_waver_signed" boolean,
     "register_date" date not null default current_date,
     "camp_id" integer references camps(camp_id),
     "participant_id" integer references participants(participant_id)
