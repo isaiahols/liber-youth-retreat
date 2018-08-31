@@ -24,13 +24,20 @@ class Part6 extends Component {
     this.props.updateNestedObject(newUpdateObj);
   }
 
-  handleAnswer(type, gender) {
-    this.handleUpdate({ what: type, val: gender })
+  handleAnswer(type, answer) {
+    this.handleUpdate({ what: type, val: answer })
   }
 
 
   // // // HANDLING SAVE AND SUBMIT (REGISTER) // // //
-  
+  handleAllThingsAtOnce() {
+    const { participant, emergency, guardian, attendee } = this.props
+    axios.post(`/api/register`, { participant, emergency, guardian, attendee }).then(resp=>{
+
+      console.log(JSON.stringify(resp.data));
+    })
+
+  }
 
 
 
@@ -52,8 +59,8 @@ class Part6 extends Component {
               <h2>Read and Sign That All Medical info is correct</h2>
             </section>
             <div>
-              <Link to='/user/dashboard' ><button>Cancel</button></Link>
-              <Link to='/home' ><button>Register</button></Link>
+              <Link to='/user/register/5' ><button>Cancel</button></Link>
+              <Link to='/user/dashboard' ><button onClick={()=>this.handleAllThingsAtOnce()} >Register</button></Link>
             </div>
 
           </div>
@@ -68,13 +75,13 @@ class Part6 extends Component {
 }
 
 function mapStateToProps(state) {
-  const { participant, user, emergency, guardian, attendants } = state;
+  const { participant, user, emergency, guardian, attendee } = state;
   return {
-    camper: participant,
+    participant,
     user,
     emergency,
     guardian,
-    attendants
+    attendee
   }
 }
 

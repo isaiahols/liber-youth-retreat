@@ -51,7 +51,7 @@ CREATE TABLE "participants"
     "participant_id" serial primary key,
     "first_name" varchar(80),
     "last_name" varchar(80),
-    "birthdate" date,
+    "birthday" date,
     "gender" varchar(20),
     "email" varchar(120),
     "size" varchar(20),
@@ -136,10 +136,9 @@ values
 
 
 insert into participants
-    (first_name, last_name,birthdate, gender,email,size,health_card_num,photo,dietary_concerns,medical_concerns,comments,email_updates,order_books,display_profile,guardian_id,user_id)
+    (first_name, last_name,birthday, gender,email,size,health_card_num,photo,dietary_concerns,medical_concerns,comments,email_updates,order_books,display_profile,guardian_id,user_id)
 values
     ('isaiah', 'oldson', '20 sept 2000', 'male', 'testing@test.email', 'XL', '123-321-123-321', 'https://picsum.photos/200/300?image=0', 'none', 'not a lot', 'nothing', true, true, true, 1, 1);
-
 
 
 

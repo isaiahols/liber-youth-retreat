@@ -40,7 +40,7 @@ class Nav extends Component {
                     <h3>Legal</h3>
                 </Link>
                 {/* </div> */}
-                {user.user_id ? (
+                {!user.user_id ? (
                     <Link to='/' >
                         <Login />
                     </Link>
@@ -55,7 +55,7 @@ class Nav extends Component {
 }
 
 
-function mapStateToProps(user) {
+function mapStateToProps({user}) {
     return {
         user,
     }
