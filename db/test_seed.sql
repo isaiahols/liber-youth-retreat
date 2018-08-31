@@ -22,6 +22,7 @@ CREATE TABLE "users"
 CREATE TABLE "legal_docs"
 (
     "legal_id" serial primary key,
+    "title" text,
     "doc" text,
     "date" date
 );
@@ -31,7 +32,8 @@ CREATE TABLE "camps"
     "camp_id" serial primary key,
     "start_date" date,
     "end_date" date,
-    "description" text
+    "description" text,
+    "location" text
 );
 
 CREATE TABLE "guardians"
@@ -65,7 +67,7 @@ CREATE TABLE "participants"
     "user_id" integer references users(user_id)
 );
 
-CREATE TABLE "attendents"
+CREATE TABLE "attendants"
 (
     "attendee_id" serial primary key,
     "group" varchar(120),
@@ -80,8 +82,10 @@ CREATE TABLE "attendents"
 CREATE TABLE "emergency_contacts"
 (
     "emergency_id" serial primary key,
-    "name" varchar(120),
-    "number" varchar(15)
+    "first_name" varchar(80),
+    "last_name" varchar(80),
+    "email" varchar(120),
+    "phone" varchar(15),
 );
 
 
@@ -124,6 +128,19 @@ insert into camps
 values
     ('2018-08-19', '2018-08-21', 'great camp for learning'),
     ('2018-08-22', '2018-08-25', 'great camp about education');
+
+insert into guardians
+    (first_name, last_name, email, phone, phone_2)
+values
+    ('John', 'Person', 'lots@email.email', '(123)321-4321', '098890-4321');
+
+
+insert into participants
+    (first_name, last_name,birthdate, gender,email,size,health_card_num,photo,dietary_concerns,medical_concerns,comments,email_updates,order_books,display_profile,guardian_id,user_id)
+values
+    ('isaiah', 'oldson', '20 sept 2000', 'male', 'testing@test.email', 'XL', '123-321-123-321', 'https://picsum.photos/200/300?image=0', 'none', 'not a lot', 'nothing', true, true, true, 1, 1);
+
+
 
 
 select *

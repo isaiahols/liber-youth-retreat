@@ -1,7 +1,24 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { updateUser, updateNestedObject } from "../../../../Ducks/registration";
 
-export default class Part5 extends Component {
+
+class Part5 extends Component {
+  componentDidMount() {
+    if (!this.props.user.user_id) {
+      axios.get('/api/user-data')
+        .then(resp => {
+          this.props.updateUser(resp.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+
+  }
+
   render() {
     return (
       <div>
@@ -39,3 +56,13 @@ export default class Part5 extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  const { participant, user } = state;
+  return {
+    camper: participant,
+    user
+  }
+}
+
+export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part5)

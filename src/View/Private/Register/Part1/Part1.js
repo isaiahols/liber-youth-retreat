@@ -1,21 +1,54 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { updateUser, updateParticipant } from "../../../../Ducks/registration";
+import { updateUser, updateNestedObject } from "../../../../Ducks/registration";
 import { connect } from "react-redux";
+import DatePicker from 'react-mobile-datepicker';
 
 class Part1 extends Component {
+    state = {
+        time: new Date(),
+        isOpen: false,
+    }
+
     componentDidMount() {
         if (!this.props.user.user_id) {
-            axios.get('/api/user-data').then(resp => {
-                this.props.updateUser(resp.data)
-            })
-        } 
+            axios.get('/api/user-data')
+                .then(resp => {
+                    this.props.updateUser(resp.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
     }
 
+    // // // Date Picker Mobile // // // 
+
+
+    handleClick = () => {
+        this.setState({ isOpen: true });
+    }
+
+    handleCancel = () => {
+        this.setState({ isOpen: false });
+    }
+
+    handleSelect = (time) => {
+        // let date = time.toString()substring(0, 11)
+        this.setState({ time, isOpen: false });
+        this.handleUpdate({ what: 'birthday', val: time })
+    }
+
+    // I NEED TO TURN THE DATE INTO JUST YYYY/MM/DD AND NOT TIME
+
+
+    // // // Updating Reducer // // //
+
     handleUpdate(updateObj) {
-        this.props.updateParticipant(updateObj);
+        let newUpdateObj = { ...updateObj, where: 'participant', }
+        this.props.updateNestedObject(newUpdateObj);
     }
 
     handleGender(gender) {
@@ -24,19 +57,36 @@ class Part1 extends Component {
 
 
     render() {
-        const { user,
+        const {
+            user,
             camper: {
                 first_name,
                 last_name,
                 birthday,
-                email }
+                email
+            }
         } = this.props
+
+
+        const monthMap = {
+            '01': 'Jan',
+            '02': 'Feb',
+            '03': 'Mar',
+            '04': 'Apr',
+            '05': 'May',
+            '06': 'Jun',
+            '07': 'Jul',
+            '08': 'Aug',
+            '09': 'Sep',
+            '10': 'Oct',
+            '11': 'Nov',
+            '12': 'Dec',
+        };
 
         return (
             <div>
                 {user.user_id ? (
                     <div>
-
                         <section>
                             <h1>Begin Registration</h1>
                         </section>
@@ -81,6 +131,24 @@ class Part1 extends Component {
                                     value={last_name}
                                 />
                                 <h3>Campers Birthday</h3>
+
+                                <a
+                                    className="select-btn"
+                                    onClick={this.handleClick}>
+                                    Select Date
+                                </a>
+                                <DatePicker
+                                    value={this.state.time}
+                                    isOpen={this.state.isOpen}
+                                    onSelect={this.handleSelect}
+                                    onCancel={this.handleCancel}
+                                    theme='android-dark'
+                                    dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
+                                    confirmText='Select'
+                                    cancelText='Cancel'
+                                    max={new Date()}
+                                    customHeader="Choose Your Birthday"
+                                />
                                 <input
                                     type="text"
                                     placeholder="dd/mm/yyyy"
@@ -139,4 +207,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateUser, updateParticipant })(Part1)
+export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part1)
