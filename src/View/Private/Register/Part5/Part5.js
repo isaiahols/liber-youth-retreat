@@ -16,7 +16,15 @@ class Part5 extends Component {
           console.log(err)
         })
     }
+  }
 
+  handleUpdate(updateObj) {
+    let newUpdateObj = { ...updateObj, where: 'participant', }
+    this.props.updateNestedObject(newUpdateObj);
+  }
+
+  handleAnswer(type, answer) {
+    this.handleUpdate({ what: type, val: answer })
   }
 
   render() {
@@ -30,15 +38,15 @@ class Part5 extends Component {
         <section>
           <h3>Would you like to receive occasional LYR updates</h3>
           <div>
-            <h4>Yes</h4>
+            <h4 onClick={() => this.handleAnswer('email_updates', true)} >Yes</h4>
             {/* yes is default */}
-            <h4>Nope</h4>
+            <h4 onClick={() => this.handleAnswer('email_updates', false)} >Nope</h4>
           </div>
           <h3>Would you like an email with a link to the books?</h3>
           <div>
-            <h4>Yes</h4>
+            <h4 onClick={() => this.handleAnswer('order_books', true)} >Yes</h4>
             {/* yes is default */}
-            <h4>Nope</h4>
+            <h4 onClick={() => this.handleAnswer('order_books', false)} >Nope</h4>
           </div>
         </section>
         <div>

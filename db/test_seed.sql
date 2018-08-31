@@ -2,7 +2,7 @@ drop table if exists mailing_list;
 drop table if exists participant_emergency;
 drop table if exists feedback;
 drop table if exists emergency_contacts;
-drop table if exists attendents;
+drop table if exists attendants;
 drop table if exists participants;
 drop table if exists guardians;
 drop table if exists camps;
@@ -71,8 +71,8 @@ CREATE TABLE "attendants"
 (
     "attendee_id" serial primary key,
     "group" varchar(120),
-    "waver_P_signed" boolean,
-    "waver_Y_signed" boolean,
+    "waver_p_signed" boolean,
+    "waver_y_signed" boolean,
     "medical_waver_signed" boolean,
     "register_date" date not null default current_date,
     "camp_id" integer references camps(camp_id),
@@ -85,7 +85,7 @@ CREATE TABLE "emergency_contacts"
     "first_name" varchar(80),
     "last_name" varchar(80),
     "email" varchar(120),
-    "phone" varchar(15),
+    "phone" varchar(15)
 );
 
 
