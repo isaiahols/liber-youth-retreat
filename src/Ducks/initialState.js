@@ -17,7 +17,6 @@ module.exports = {
         display_profile: true,
     },
     guardian: {
-        camp_id: '',
         first_name: 'r',
         last_name: 'e',
         email: 's',

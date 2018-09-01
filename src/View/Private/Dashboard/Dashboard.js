@@ -21,6 +21,7 @@ class Dashboard extends Component {
         authorized: true
       })
     })
+    // axios.get('/api/')
   }
 
   render() {

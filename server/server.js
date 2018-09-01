@@ -34,11 +34,14 @@ app.use(session({
 
 // // // Endpoints // // //
 
-app.get('/api/session-info', rc.giveSessionData);
+// GETTING INFO //
+app.get('/api/user/participant', rc.getParticipant)
+app.get('/api/user/guardian/:p_id', rc.getGuardian)
 
-
-// // // REGISTERING A PARTICIPANT IN ORDER! // // //
+// REGISTERING // 
 app.post('/api/register', rc.registerParticipant)
+
+
 
 
 
