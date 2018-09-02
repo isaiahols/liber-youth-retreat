@@ -26,7 +26,6 @@ class Nav extends Component {
         return (
             <div className='navBar'>
 
-                {/* <div> */}
                 <Link to='/' >
                     <h3>Home</h3>
                 </Link>
@@ -39,15 +38,12 @@ class Nav extends Component {
                 <Link to='/legal' >
                     <h3>Legal</h3>
                 </Link>
-                {/* </div> */}
-                {!user.user_id ? (
+                {user.user_id ? (
+                    <Logout />
+                ) : (
                     <Link to='/' >
                         <Login />
                     </Link>
-                ) : (
-                        <Link to='/' >
-                            <Logout />
-                        </Link>
                     )}
             </div>
         )
@@ -55,7 +51,7 @@ class Nav extends Component {
 }
 
 
-function mapStateToProps({user}) {
+function mapStateToProps({ user }) {
     return {
         user,
     }

@@ -6,22 +6,8 @@ import { connect } from "react-redux";
 import { updateUser } from "../../../Ducks/registration";
 
 class Dashboard extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      authorized: false
-    }
-  }
-
   componentDidMount() {
-    axios.get('/api/user-data').then(resp => {
-      this.props.updateUser(resp.data)
-      this.setState({
-        authorized: true
-      })
-    })
-    // axios.get('/api/')
+    
   }
 
   render() {

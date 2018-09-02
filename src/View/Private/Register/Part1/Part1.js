@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { updateUser, updateNestedObject } from "../../../../Ducks/registration";
 import { connect } from "react-redux";
 import DatePicker from 'react-mobile-datepicker';
+
+import {
+    updateUser,
+    updateNestedObject,
+    updateObjectOnState,
+    getParticipants
+} from "../../../../Ducks/registration";
+import ParticipantTiles from '../../../../Components/TileBuilders/ParticipantTiles';
 
 class Part1 extends Component {
     state = {
@@ -20,12 +27,12 @@ class Part1 extends Component {
                 .catch(err => {
                     console.log(err)
                 })
-        }
-
+            }
+        this.props.getParticipants('/api/user/participant')
     }
 
-    // // // Date Picker Mobile // // // 
 
+    // // // Date Picker Mobile // // // 
 
     handleClick = () => {
         this.setState({ isOpen: true });
@@ -55,6 +62,11 @@ class Part1 extends Component {
         this.handleUpdate({ what: 'gender', val: gender })
     }
 
+    handleTesting() {
+        console.log('let the test begin');
+        this.props.getParticipants()
+    }
+
 
     render() {
         const {
@@ -64,9 +76,9 @@ class Part1 extends Component {
                 last_name,
                 birthday,
                 email
-            }
+            },
+            usersParticipants
         } = this.props
-
 
         const monthMap = {
             '01': 'Jan',
@@ -83,14 +95,21 @@ class Part1 extends Component {
             '12': 'Dec',
         };
 
+        // // // Calling Participant Tile Builder // // //
+        let mappedParticipants = usersParticipants.map(one => {
+            return <ParticipantTiles participant={one} />
+        })
+
         return (
             <div>
+                <button onClick={() => this.handleTesting()} >test Click</button>
                 {user.user_id ? (
                     <div>
                         <section>
                             <h1>Begin Registration</h1>
                         </section>
                         <section className="savedParts">
+                            {mappedParticipants}
                             {/* add turnery statement here to show Only if there are saved participants */}
                             <h2>Select Saved Camper or Fill Out Below to Add a New Camper</h2>
                             {/* display saved participants from participants table in db*/}
@@ -200,11 +219,26 @@ class Part1 extends Component {
 }
 
 function mapStateToProps(state) {
-    const { participant, user } = state;
+    const {
+        participant,
+        user,
+        usersParticipants
+    } = state;
+
     return {
         camper: participant,
-        user
+        user,
+        usersParticipants
     }
 }
 
-export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part1)
+const mapDispatchToProps = {
+    updateUser,
+    updateNestedObject,
+    updateObjectOnState,
+    getParticipants
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Part1)
+

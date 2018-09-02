@@ -61,6 +61,8 @@ module.exports = {
         // checking if user is signed in
         if (req.session.user) {
             res.status(200).send(req.session.user)
+            console.log(req.session);
+            
         } else {
             res.status(401).send('nope! try signing in...');
         }
