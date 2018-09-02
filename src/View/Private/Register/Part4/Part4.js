@@ -57,6 +57,8 @@ class Part4 extends Component {
                 last={last_name}
                 email={email}
                 phone={phone}
+                which={'emergency'}
+                all={each}
             />)
         })
 

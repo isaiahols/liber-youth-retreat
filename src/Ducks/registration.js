@@ -17,7 +17,8 @@ export default (state = initialState, action) => {
             return newState;
         case UPDATE_OBJECT_iN_STATE:
             const { which, content } = payload;
-            newState[which] = [...state.usersParticipants, content[0]]
+            newState[which] = content
+            // [...state.usersParticipants, content[0]]
             return newState;
         case GET_PARTICIPANT_FULFILLED:
             newState.usersParticipants = payload.data;
