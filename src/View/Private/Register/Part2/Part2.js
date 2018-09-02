@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { updateUser, updateNestedObject } from "../../../../Ducks/registration";
 import { connect } from "react-redux";
+
+import {
+    updateUser,
+    updateNestedObject
+} from "../../../../Ducks/registration";
+
+import './Part2.css';
 
 class Part2 extends Component {
     componentDidMount() {
@@ -15,7 +21,6 @@ class Part2 extends Component {
                     console.log(err)
                 })
         }
-
     }
 
     handleUpdate(updateObj) {
@@ -87,7 +92,7 @@ class Part2 extends Component {
                                 <h2>Please List ALL Medical Concerns</h2>
                                 <textarea
                                     name="Medical Concerns"
-                                    id="" c
+                                    type="text"
                                     ols="30"
                                     rows="6"
                                     onChange={(e) => this.handleUpdate({ what: 'medical_concerns', val: e.target.value })}
@@ -146,4 +151,9 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part2)
+const mapDispatchToProps = {
+    updateUser,
+    updateNestedObject
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Part2)

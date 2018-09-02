@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from "react-redux";
-import { updateUser, updateNestedObject } from '../../../../Ducks/registration'
+
+import {
+    updateUser,
+    updateNestedObject,
+    getEmergency
+} from '../../../../Ducks/registration'
+import FullTiles from "../../../../Components/TileBuilders/FullTiles";
 
 class Part4 extends Component {
     state = {
@@ -19,6 +25,7 @@ class Part4 extends Component {
                     console.log(err)
                 })
         }
+        this.props.getEmergency('/api/user/emergency')
     }
 
     handleSameClick(answer) {
@@ -40,6 +47,19 @@ class Part4 extends Component {
             email,
             phone,
         } = this.props[guardOrEmerg]
+        const { usersEmergency } = this.props
+
+        const mappedEmergency = usersEmergency.map(each => {
+            const { emergency_id, first_name, last_name, email, phone } = each
+            return (<FullTiles
+                key={emergency_id}
+                first={first_name}
+                last={last_name}
+                email={email}
+                phone={phone}
+            />)
+        })
+
         return (
             <div>
                 <section>
@@ -49,6 +69,7 @@ class Part4 extends Component {
                     <h2>Select one or more Saved Emergency Contact</h2>
                     {/* highlight the each selected Emergency Contact  */}
                     {/* use guardian tile builder here */}
+                    {mappedEmergency}
                 </section>
                 <div>
                     <h2>Same as Guardian</h2>
@@ -106,12 +127,19 @@ class Part4 extends Component {
 }
 
 function mapStateToProps(state) {
-    const { guardian, emergency, user } = state;
+    const { guardian, emergency, user, usersEmergency } = state;
     return {
         guardian,
         emergency,
-        user
+        user,
+        usersEmergency
     }
 }
 
-export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part4)
+const mapDispatchToProps = {
+    updateUser,
+    updateNestedObject,
+    getEmergency
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Part4)

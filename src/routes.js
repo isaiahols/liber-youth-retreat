@@ -9,7 +9,7 @@ import Legal from "./View/Public/Legal/Legal";
 
 // private page
 import UserDashboard from "./View/Private/Dashboard/Dashboard";
-import Register from "./View/Private/Register/Register";
+// import Register from "./View/Private/Register/Register";
 import ThankYou from './View/Private/ThankYou/ThankYou';
 import Payment from './View/Private/Payment/Payment';
 

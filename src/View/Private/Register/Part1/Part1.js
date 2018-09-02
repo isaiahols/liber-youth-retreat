@@ -27,7 +27,7 @@ class Part1 extends Component {
                 .catch(err => {
                     console.log(err)
                 })
-            }
+        }
         this.props.getParticipants('/api/user/participant')
     }
 
@@ -97,7 +97,7 @@ class Part1 extends Component {
 
         // // // Calling Participant Tile Builder // // //
         let mappedParticipants = usersParticipants.map(one => {
-            return <ParticipantTiles participant={one} />
+            return <ParticipantTiles key={one.participant_id} participant={one} />
         })
 
         return (

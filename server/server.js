@@ -35,11 +35,12 @@ app.use(session({
 // // // Endpoints // // //
 
 // GETTING INFO //
-app.get('/api/user/participant', rc.getParticipant)
-app.get('/api/user/guardian/:p_id', rc.getGuardian)
+app.get('/api/user/participant', rc.getParticipant);
+app.get('/api/user/guardian', rc.getGuardian);
+app.get('/api/user/emergency', rc.getEmergency);
 
 // REGISTERING // 
-app.post('/api/register', rc.registerParticipant)
+app.post('/api/register', rc.registerParticipant);
 
 
 
@@ -55,9 +56,9 @@ app.post('/api/register', rc.registerParticipant)
 
 app.get('/auth/callback', ac.login);
 
-app.get('/api/user-data', aw.envCheck, ac.userData)
+app.get('/api/user-data', aw.envCheck, ac.userData);
 
-app.get('/auth/logout', ac.logout)
+app.get('/auth/logout', ac.logout);
 
 
 

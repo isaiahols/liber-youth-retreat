@@ -15,9 +15,18 @@ module.exports = {
     },
     getGuardian: (req, res) => {
         const db = req.app.get('db')
-        const { p_id } = req.params;
+        const { user_id } = req.session.user;
 
-        db.get_guardian_by_id([p_id])
+        db.get_guardian_by_id([user_id])
+            .then(resp => {
+                res.status(200).send(resp)
+            })
+    },
+    getEmergency: (req, res) => {
+        const db = req.app.get('db')
+        const { user_id } = req.session.user;
+
+        db.get_user_emergency([user_id])
             .then(resp => {
                 res.status(200).send(resp)
             })

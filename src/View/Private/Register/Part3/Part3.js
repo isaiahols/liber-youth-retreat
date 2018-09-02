@@ -2,7 +2,14 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from "react-redux";
-import { updateUser, updateNestedObject } from '../../../../Ducks/registration'
+
+import {
+    updateUser,
+    updateNestedObject,
+    getGuardian
+} from '../../../../Ducks/registration';
+
+import FullTiles from "../../../../Components/TileBuilders/FullTiles";
 
 class Part3 extends Component {
     componentDidMount() {
@@ -15,7 +22,7 @@ class Part3 extends Component {
                     console.log(err)
                 })
         }
-
+        this.props.getGuardian('/api/user/guardian')
     }
 
     handleUpdate(updateObj) {
@@ -32,8 +39,20 @@ class Part3 extends Component {
                 email,
                 phone,
                 phone2
-            }
+            },
+            usersGuardians
         } = this.props
+
+        const mappedGuardians = usersGuardians.map(each => {
+            const { guardian_id, first_name, last_name, email, phone } = each
+            return (<FullTiles
+                key={guardian_id}
+                first={first_name}
+                last={last_name}
+                email={email}
+                phone={phone}
+            />)
+        })
 
         return (
             <div>
@@ -46,6 +65,7 @@ class Part3 extends Component {
                         <section>
                             <h2>Select a Saved Guardian</h2>
                             {/* use guardian tile builder here */}
+                            {mappedGuardians}
                         </section>
                         <section>
                             <div>
@@ -106,11 +126,18 @@ class Part3 extends Component {
 }
 
 function mapStateToProps(state) {
-    const { guardian, user } = state;
+    const { guardian, user, usersGuardians } = state;
     return {
         guardian,
-        user
+        user,
+        usersGuardians
     }
 }
 
-export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part3)
+const mapDispatchToProps = {
+    updateUser,
+    updateNestedObject,
+    getGuardian
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Part3)

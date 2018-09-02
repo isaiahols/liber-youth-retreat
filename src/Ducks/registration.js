@@ -9,11 +9,6 @@ export default (state = initialState, action) => {
 
     let newState = JSON.parse(JSON.stringify(state))
     switch (type) {
-        case CHANGE_VAR_PLACING:
-            const { placing } = payload;
-            console.log(placing);
-
-            break;
         case UPDATE_USER:
             return Object.assign({}, state, { user: payload })
         case UPDATE_NESTED_OBJECT:
@@ -21,13 +16,17 @@ export default (state = initialState, action) => {
             newState[where][what] = val
             return newState;
         case UPDATE_OBJECT_iN_STATE:
-            console.log(payload);
             const { which, content } = payload;
             newState[which] = [...state.usersParticipants, content[0]]
             return newState;
         case GET_PARTICIPANT_FULFILLED:
-            console.log(payload);
             newState.usersParticipants = payload.data;
+            return newState;
+        case GET_GUARDIAN_FULFILLED:
+            newState.usersGuardians = payload.data
+            return newState;
+        case GET_EMERGENCY_FULFILLED:
+            newState.usersEmergency = payload.data
             return newState;
 
 
@@ -47,8 +46,10 @@ const UPDATE_NESTED_OBJECT = 'UPDATE_NESTED_OBJECT';
 const UPDATE_OBJECT_iN_STATE = 'UPDATE_OBJECT_iN_STATE';
 const GET_PARTICIPANT = 'GET_PARTICIPANT';
 const GET_PARTICIPANT_FULFILLED = 'GET_PARTICIPANT_FULFILLED';
-// const
-const CHANGE_VAR_PLACING = 'CHANGE_VAR_PLACING';
+const GET_GUARDIAN = 'GET_GUARDIAN';
+const GET_GUARDIAN_FULFILLED = 'GET_GUARDIAN_FULFILLED';
+const GET_EMERGENCY = 'GET_EMERGENCY';
+const GET_EMERGENCY_FULFILLED = 'GET_EMERGENCY_FULFILLED';
 
 const RESET_STATE = 'RESET_STATE'
 
@@ -84,6 +85,18 @@ export function updateUser(user) {
 export const getParticipants = (url) => {
     return {
         type: GET_PARTICIPANT,
+        payload: axios.get(url)
+    }
+}
+export const getGuardian = (url) => {
+    return {
+        type: GET_GUARDIAN,
+        payload: axios.get(url)
+    }
+}
+export const getEmergency = (url) => {
+    return {
+        type: GET_EMERGENCY,
         payload: axios.get(url)
     }
 }
