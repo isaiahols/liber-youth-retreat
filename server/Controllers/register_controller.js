@@ -136,7 +136,9 @@ module.exports = {
 
         let attendee = await db.add_attendee([group_id, waver_p_signed, waver_y_signed, medical_waver_signed, register_date, camp, p_id]).catch(err => console.log(err))
 
-        let emergencyContPart = await db.add_participant_emergency([p_id, e_id])
+        const a_id = attendee[0].attendee_id
+
+        let emergencyContPart = await db.add_participant_emergency([p_id, e_id, a_id])
         // // // I WANT TO BE ABLE TO USE PROMISE.ALL() TO SEND THESE BOTH OFF AT THE SAME TIME
 
         res.status(200).send({ guardian, emergency, participant, attendee, emergencyContPart })

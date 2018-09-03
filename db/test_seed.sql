@@ -33,7 +33,8 @@ CREATE TABLE "camps"
     "start_date" date,
     "end_date" date,
     "description" text,
-    "location" text
+    "location" text,
+    "title" text
 );
 
 CREATE TABLE "guardians"
@@ -105,7 +106,8 @@ CREATE TABLE "participant_emergency"
 (
     "participant_emergance_id" serial primary key,
     "participant_id" integer references participants(participant_id),
-    "emergency_id" integer references emergency_contacts(emergency_id)
+    "emergency_id" integer references emergency_contacts(emergency_id),
+    "attendee_id" integer references attendants(attendee_id)
 );
 
 
@@ -124,10 +126,10 @@ CREATE TABLE "mailing_list"
 
 
 insert into camps
-    (start_date, end_date, description)
+    (start_date, end_date, description, location, title)
 values
-    ('2018-08-19', '2018-08-21', 'great camp for learning'),
-    ('2018-08-22', '2018-08-25', 'great camp about education');
+    ('2018-08-19', '2018-08-21', 'great camp for learning', 'Crowsnest Pass', 'Leader Servent'),
+    ('2018-08-22', '2018-08-25', 'great camp about education', 'Bragg Creek', 'Love of Learning');
 
 insert into guardians
     (first_name, last_name, email, phone, phone_2)

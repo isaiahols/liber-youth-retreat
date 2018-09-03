@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.307.0",
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
@@ -10,13 +11,16 @@
     "massive": "^5.2.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-dropzone": "^5.0.1",
     "react-mobile-datepicker": "^3.0.12",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "react-spinners": "^0.4.5",
     "redux": "^4.0.0",
     "redux-promise-middleware": "^5.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,6 +34,9 @@
       "target": "http://localhost:3035"
     },
     "/auth": {
+      "target": "http://localhost:3035"
+    },
+    "/": {
       "target": "http://localhost:3035"
     }
   }

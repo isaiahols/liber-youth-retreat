@@ -2,3 +2,18 @@ textarea {
     resize: none;
     min-width: 200px;
 }
+
+.dropInput {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+    bottom: 0px; 
+    left: 0px; 
+    opacity: 1e-05; 
+    pointer-events: none;
+}
+
+.confirmPhoto {
+    width: 200px;
+    height: auto;
+}

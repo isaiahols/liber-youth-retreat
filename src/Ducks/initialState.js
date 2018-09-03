@@ -36,17 +36,32 @@ module.exports = {
         waver_Y_signed: false,
         medical_waver_signed: false,
         register_date: new Date(),
-        camp_id: '2',
+        camp_id: 0,
         participant_id: '',
     },
     user: {},
     usersGuardians: [],
     usersEmergency: [],
     usersParticipants: [],
-    groups: {
-        character: 'character',
-        education: 'education',
-        mission: 'mission'
-    },
+    groups: [
+        {
+            group_id: 1,
+            title: 'character',
+            ages: '12-14',
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, fugiat amet natus eveniet quisquam possimus.'
+        },
+        {
+            group_id: 2,
+            title: 'education',
+            ages: '15-16',
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, fugiat amet natus eveniet quisquam possimus.'
+        },
+        {
+            group_id: 3,
+            title: 'mission',
+            ages: '17-18',
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, fugiat amet natus eveniet quisquam possimus.'
+        }
+    ],
     camps: []
 }

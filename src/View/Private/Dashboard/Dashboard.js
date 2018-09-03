@@ -29,14 +29,17 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user} = this.props
     return (
       <div>
         Dashboard
         {user.user_id ? (
-          <Link to='/user/register/1' >
-            <button>Register</button>
-          </Link>
+          <div>
+
+            <Link to='/user/register/1' >
+              <button>Register</button>
+            </Link>
+          </div>
           // get camps and select
         ) : (
             <h1>Please Login or Register</h1>
@@ -47,9 +50,11 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-  const { user } = state;
+  const { user, camps, groups } = state;
   return {
-    user
+    user,
+    camps,
+    groups
   }
 }
 

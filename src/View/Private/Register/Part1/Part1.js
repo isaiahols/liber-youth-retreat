@@ -11,6 +11,8 @@ import {
     getParticipants
 } from "../../../../Ducks/registration";
 import ParticipantTiles from '../../../../Components/TileBuilders/ParticipantTiles';
+import CampTiles from "../../../../Components/TileBuilders/CampTiles";
+import GroupTiles from "../../../../Components/TileBuilders/GroupTiles";
 
 class Part1 extends Component {
     state = {
@@ -80,7 +82,9 @@ class Part1 extends Component {
                 birthday,
                 email
             },
-            usersParticipants
+            usersParticipants,
+            groups,
+            camps
         } = this.props
 
         const monthMap = {
@@ -98,11 +102,16 @@ class Part1 extends Component {
             '12': 'Dec',
         };
 
-        // // // Calling Participant Tile Builder // // //
+        // // // Calling Tile Builders // // //
         let mappedParticipants = usersParticipants.map(one => {
             return <ParticipantTiles key={one.participant_id} participant={one} />
         })
-        // let mappedCamps = 
+        let mappedCamps = camps.map(camp => {
+            return <CampTiles key={camp.camp_id} camp={camp} />
+        })
+        let mappedGroups = groups.map(group => {
+            return <GroupTiles key={group.group_id} group={group} />
+        })
 
         return (
             <div>
@@ -113,25 +122,22 @@ class Part1 extends Component {
                         </section>
                         {usersParticipants[0] ? (
                             <section className="savedParts">
-                                {/* add turnery statement here to show Only if there are saved participants */}
                                 <h2>Select Saved Camper or Fill Out Below to Add a New Camper</h2>
-                                {/* display saved participants from participants table in db*/}
                                 {mappedParticipants}
                             </section>
 
                         ) : (
                                 <div>
-                                    <h1>No saved Campers</h1>
+                                    <h1>No Saved Campers</h1>
                                 </div>
                             )}
                         <section className="selectCamp">
                             <h1>Select a Camp</h1>
-                            {/* list of camps (from camps table in db) */}
-                            {/* display Camp Tiles from  */}
+                            {mappedCamps}
                         </section>
                         <section className="selectGroup">
                             <h1>Select a Group</h1>
-                            {/* Group Tiles from Components/TileBuilder/GroupTiles */}
+                            {mappedGroups}
                         </section>
                         <section>
                             <div className="ParticipantFields">
