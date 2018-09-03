@@ -22,7 +22,7 @@ class Part3 extends Component {
                     console.log(err)
                 })
         }
-        this.props.getGuardian('/api/user/guardian')
+        // this.props.getGuardian('/api/user/guardian')
     }
 
     handleUpdate(updateObj) {
@@ -38,21 +38,17 @@ class Part3 extends Component {
                 last_name,
                 email,
                 phone,
-                phone2
+                phone_2
             },
             usersGuardians
         } = this.props
 
         const mappedGuardians = usersGuardians.map(each => {
-            const { guardian_id, first_name, last_name, email, phone } = each
+            const { guardian_id } = each
             return (<FullTiles
                 key={guardian_id}
-                first={first_name}
-                last={last_name}
-                email={email}
-                phone={phone}
+                each={each}
                 which={'guardian'}
-                all={each}
             />)
         })
 
@@ -99,8 +95,8 @@ class Part3 extends Component {
                                 <h3>Other Phone</h3>
                                 <input
                                     type="text"
-                                    onChange={(e) => this.handleUpdate({ what: 'phone2', val: e.target.value })}
-                                    value={phone2}
+                                    onChange={(e) => this.handleUpdate({ what: 'phone_2', val: e.target.value })}
+                                    value={phone_2}
                                 />
                             </div>
                         </section>

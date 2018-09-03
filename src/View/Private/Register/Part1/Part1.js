@@ -15,6 +15,7 @@ import ParticipantTiles from '../../../../Components/TileBuilders/ParticipantTil
 class Part1 extends Component {
     state = {
         time: new Date(),
+        // time: `${new Date().getFullYear()} ${new Date().getMonth()} ${new Date().getDate()}`,
         isOpen: false,
     }
 
@@ -28,11 +29,13 @@ class Part1 extends Component {
                     console.log(err)
                 })
         }
-        this.props.getParticipants('/api/user/participant')
+        // this.props.getParticipants('/api/user/participant')
     }
 
 
     // // // Date Picker Mobile // // // 
+
+    // set this to height 0 when larger tha tablet and expand height of other date picker
 
     handleClick = () => {
         this.setState({ isOpen: true });
@@ -62,9 +65,9 @@ class Part1 extends Component {
         this.handleUpdate({ what: 'gender', val: gender })
     }
 
-    handleTesting() {
-        console.log('let the test begin');
-        this.props.getParticipants()
+    handleClickToEdit(what) {
+        let updateObj = { what, val: '' }
+        this.handleUpdate(updateObj)
     }
 
 
@@ -99,21 +102,28 @@ class Part1 extends Component {
         let mappedParticipants = usersParticipants.map(one => {
             return <ParticipantTiles key={one.participant_id} participant={one} />
         })
+        // let mappedCamps = 
 
         return (
             <div>
-                <button onClick={() => this.handleTesting()} >test Click</button>
                 {user.user_id ? (
                     <div>
                         <section>
                             <h1>Begin Registration</h1>
                         </section>
-                        <section className="savedParts">
-                            {mappedParticipants}
-                            {/* add turnery statement here to show Only if there are saved participants */}
-                            <h2>Select Saved Camper or Fill Out Below to Add a New Camper</h2>
-                            {/* display saved participants from participants table in db*/}
-                        </section>
+                        {usersParticipants[0] ? (
+                            <section className="savedParts">
+                                {/* add turnery statement here to show Only if there are saved participants */}
+                                <h2>Select Saved Camper or Fill Out Below to Add a New Camper</h2>
+                                {/* display saved participants from participants table in db*/}
+                                {mappedParticipants}
+                            </section>
+
+                        ) : (
+                                <div>
+                                    <h1>No saved Campers</h1>
+                                </div>
+                            )}
                         <section className="selectCamp">
                             <h1>Select a Camp</h1>
                             {/* list of camps (from camps table in db) */}
@@ -135,6 +145,7 @@ class Part1 extends Component {
                                                 val: e.target.value
                                             })
                                     }}
+                                    onClick={() => this.handleClickToEdit('first_name')}
                                     value={first_name}
                                 />
                                 <h3>Campers Last Name</h3>
@@ -147,15 +158,33 @@ class Part1 extends Component {
                                                 val: e.target.value
                                             })
                                     }}
+                                    onClick={() => this.handleClickToEdit('last_name')}
                                     value={last_name}
                                 />
                                 <h3>Campers Birthday</h3>
 
-                                <a
+                                <button
                                     className="select-btn"
                                     onClick={this.handleClick}>
                                     Select Date
-                                </a>
+                                </button>
+                                {birthday ? (
+                                    <input
+                                        type="text"
+                                        placeholder="dd/mm/yyyy"
+                                        onChange={(e) => {
+                                            this.handleUpdate(
+                                                {
+                                                    what: 'birthday',
+                                                    val: e.target.value.replace('/', '')
+                                                })
+                                        }}
+                                        value={birthday}
+                                    />
+
+                                ) : (
+                                        <h4>no date selected</h4>
+                                    )}
                                 <DatePicker
                                     value={this.state.time}
                                     isOpen={this.state.isOpen}
@@ -168,18 +197,6 @@ class Part1 extends Component {
                                     max={new Date()}
                                     customHeader="Choose Your Birthday"
                                 />
-                                <input
-                                    type="text"
-                                    placeholder="dd/mm/yyyy"
-                                    onChange={(e) => {
-                                        this.handleUpdate(
-                                            {
-                                                what: 'birthday',
-                                                val: e.target.value.replace('/', '')
-                                            })
-                                    }}
-                                    value={birthday}
-                                />
                                 <h3>Campers Email</h3>
                                 <input
                                     type="text"
@@ -190,6 +207,7 @@ class Part1 extends Component {
                                                 val: e.target.value
                                             })
                                     }}
+                                    onClick={() => this.handleClickToEdit('email')}
                                     value={email}
                                 />
                                 <div>
@@ -222,13 +240,17 @@ function mapStateToProps(state) {
     const {
         participant,
         user,
-        usersParticipants
+        usersParticipants,
+        camps,
+        groups
     } = state;
 
     return {
         camper: participant,
         user,
-        usersParticipants
+        usersParticipants,
+        camps,
+        groups
     }
 }
 

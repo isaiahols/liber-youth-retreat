@@ -3,11 +3,29 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 
-import { updateUser } from "../../../Ducks/registration";
+import {
+  updateUser,
+  getParticipants,
+  getGuardian,
+  getEmergency,
+  getCamps
+} from "../../../Ducks/registration";
 
 class Dashboard extends Component {
   componentDidMount() {
-    
+    if (!this.props.user.user_id) {
+      axios.get('/api/user-data')
+        .then(resp => {
+          this.props.updateUser(resp.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+    this.props.getParticipants('/api/user/participant');
+    this.props.getGuardian('/api/user/guardian');
+    this.props.getEmergency('/api/user/emergency');
+    this.props.getCamps('/api/camps')
   }
 
   render() {
@@ -19,6 +37,7 @@ class Dashboard extends Component {
           <Link to='/user/register/1' >
             <button>Register</button>
           </Link>
+          // get camps and select
         ) : (
             <h1>Please Login or Register</h1>
           )}
@@ -34,5 +53,13 @@ function mapStateToProps(state) {
   }
 }
 
+const mapDispatchToProps = {
+  updateUser,
+  getParticipants,
+  getGuardian,
+  getEmergency,
+  getCamps
+}
 
-export default connect(mapStateToProps, { updateUser })(Dashboard)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

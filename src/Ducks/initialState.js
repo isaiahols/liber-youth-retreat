@@ -1,6 +1,5 @@
 module.exports = {
     participant: {
-        participant_id: '',
         first_name: '',
         last_name: '',
         birthday: '',
@@ -32,12 +31,12 @@ module.exports = {
         phone: '',
     },
     attendee: {
-        group_id: '',
+        group_id: 'education',
         waver_P_signed: false,
         waver_Y_signed: false,
         medical_waver_signed: false,
         register_date: new Date(),
-        camp_id: '',
+        camp_id: '2',
         participant_id: '',
     },
     user: {},
@@ -48,5 +47,6 @@ module.exports = {
         character: 'character',
         education: 'education',
         mission: 'mission'
-    }
+    },
+    camps: []
 }

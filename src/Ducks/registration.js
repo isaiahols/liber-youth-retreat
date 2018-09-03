@@ -29,6 +29,9 @@ export default (state = initialState, action) => {
         case GET_EMERGENCY_FULFILLED:
             newState.usersEmergency = payload.data
             return newState;
+        case GET_CAMPS_FULFILLED:
+            newState.camps = payload.data
+            return newState;
 
 
         case RESET_STATE:
@@ -51,6 +54,8 @@ const GET_GUARDIAN = 'GET_GUARDIAN';
 const GET_GUARDIAN_FULFILLED = 'GET_GUARDIAN_FULFILLED';
 const GET_EMERGENCY = 'GET_EMERGENCY';
 const GET_EMERGENCY_FULFILLED = 'GET_EMERGENCY_FULFILLED';
+const GET_CAMPS = 'GET_CAMPS';
+const GET_CAMPS_FULFILLED = 'GET_CAMPS_FULFILLED';
 
 const RESET_STATE = 'RESET_STATE'
 
@@ -98,6 +103,12 @@ export const getGuardian = (url) => {
 export const getEmergency = (url) => {
     return {
         type: GET_EMERGENCY,
+        payload: axios.get(url)
+    }
+}
+export const getCamps = (url) => {
+    return {
+        type: GET_CAMPS,
         payload: axios.get(url)
     }
 }

@@ -4,14 +4,15 @@ import { updateObjectOnState } from '../../Ducks/registration';
 
 
 const FullTiles =(props) => {
-    const { first, last, email, phone, which, all } = props
+    const{each,which}= props
+    const { first_name, last_name, email, phone} = each
     let handleSelect=()=>{
-        props.updateObjectOnState({which, content: all })
+        props.updateObjectOnState({which, content: each })
     }
 
     return (
         <div onClick={() => handleSelect()} >
-            <h2>{`${first} ${last}`}</h2>
+            <h2>{`${first_name} ${last_name}`}</h2>
             <h3>{email}</h3>
             <h3>{phone}</h3>
         </div>

@@ -25,7 +25,7 @@ class Part4 extends Component {
                     console.log(err)
                 })
         }
-        this.props.getEmergency('/api/user/emergency')
+        // this.props.getEmergency('/api/user/emergency')
     }
 
     handleSameClick(answer) {
@@ -50,15 +50,11 @@ class Part4 extends Component {
         const { usersEmergency } = this.props
 
         const mappedEmergency = usersEmergency.map(each => {
-            const { emergency_id, first_name, last_name, email, phone } = each
+            const { emergency_id } = each
             return (<FullTiles
                 key={emergency_id}
-                first={first_name}
-                last={last_name}
-                email={email}
-                phone={phone}
+                each={each}
                 which={'emergency'}
-                all={each}
             />)
         })
 

@@ -38,6 +38,7 @@ app.use(session({
 app.get('/api/user/participant', rc.getParticipant);
 app.get('/api/user/guardian', rc.getGuardian);
 app.get('/api/user/emergency', rc.getEmergency);
+app.get('/api/camps', rc.getCamps);
 
 // REGISTERING // 
 app.post('/api/register', rc.registerParticipant);

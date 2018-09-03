@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateUser, updateNestedObject } from "../../../../Ducks/registration";
+import { updateUser, updateNestedObject, updateObjectOnState } from "../../../../Ducks/registration";
+import initialState from '../../../../Ducks/initialState'
 
 class Part6 extends Component {
   // // // AUTHENTICATION CHECK // // //
@@ -30,12 +31,15 @@ class Part6 extends Component {
 
 
   // // // HANDLING SAVE AND SUBMIT (REGISTER) // // //
-  handleAllThingsAtOnce() {
+  async handleAllThingsAtOnce() {
     const { participant, emergency, guardian, attendee } = this.props
-    axios.post(`/api/register`, { participant, emergency, guardian, attendee }).then(resp=>{
+    let confirm = await axios.post(`/api/register`, { participant, emergency, guardian, attendee })
+    console.log(JSON.stringify(confirm.data));
 
-      console.log(JSON.stringify(resp.data));
-    })
+    let one = await this.props.updateObjectOnState({ which: 'participant', content: initialState.participant });
+    let two = await this.props.updateObjectOnState({ which: 'guardian', content: initialState.guardian });
+    let three = await this.props.updateObjectOnState({ which: 'emergency', content: initialState.emergency });
+    let four = await this.props.updateObjectOnState({ which: 'attendee', content: initialState.attendee })
 
   }
 
@@ -43,6 +47,7 @@ class Part6 extends Component {
 
   render() {
     const { user } = this.props
+
     return (
       <div>
         {user.user_id ? (
@@ -59,8 +64,11 @@ class Part6 extends Component {
               <h2>Read and Sign That All Medical info is correct</h2>
             </section>
             <div>
-              <Link to='/user/register/5' ><button>Cancel</button></Link>
-              <Link to='/user/dashboard' ><button onClick={()=>this.handleAllThingsAtOnce()} >Register</button></Link>
+              <Link to='/user/dashboard' ><button>Cancel</button></Link>
+              <Link to='/user/register/5' >
+                <button>Back</button>
+              </Link>
+              <Link to='/user/dashboard' ><button onClick={() => this.handleAllThingsAtOnce()} >Register</button></Link>
             </div>
 
           </div>
@@ -85,4 +93,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { updateUser, updateNestedObject })(Part6)
+const mapDispatchToProps = {
+  updateUser,
+  updateNestedObject,
+  updateObjectOnState
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Part6)
