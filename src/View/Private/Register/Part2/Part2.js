@@ -228,7 +228,7 @@ class Part2 extends Component {
                                 <button>Save and Continue</button>
                             </Link>
                             <Link to='/user/register/1' >
-                                <button>Back</button>
+                                <button>Previous</button>
                             </Link>
                             <Link to='/user/dashboard' >
                                 <button>Cancel</button>

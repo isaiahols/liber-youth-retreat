@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { CardElement, injectStripe } from 'react-stripe-elements';
+
 import { updateUser, updateNestedObject, updateObjectOnState } from "../../../../Ducks/registration";
 import initialState from '../../../../Ducks/initialState'
 
@@ -19,6 +21,20 @@ class Part6 extends Component {
     }
   }
 
+  // // // STRIPE // // // 
+  async submit(ev) {
+    this.handleAllThingsAtOnce();
+
+    let { token } = await this.props.stripe.createToken({ name: "Name" });
+    let response = await fetch("/charge", {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: token.id
+    });
+
+    if (response.ok) console.log("Purchase Complete!")
+  }
+
   // // // UPDATING REDUX // // //
   handleUpdate(updateObj) {
     let newUpdateObj = { ...updateObj, where: 'participant', }
@@ -32,6 +48,8 @@ class Part6 extends Component {
 
   // // // HANDLING SAVE AND SUBMIT (REGISTER) // // //
   async handleAllThingsAtOnce() {
+
+
     const { participant, emergency, guardian, attendee } = this.props
     let confirm = await axios.post(`/api/register`, { participant, emergency, guardian, attendee })
     console.log(JSON.stringify(confirm.data));
@@ -58,17 +76,21 @@ class Part6 extends Component {
               <h2>Waver and legal docs</h2>
               <h3>
                 Waver parent and youth
-          </h3>
+              </h3>
             </section>
             <section>
               <h2>Read and Sign That All Medical info is correct</h2>
             </section>
-            <div>
+
+            {/* this is now the checkout section */}
+
+            <div className="checkout">
+              <CardElement />
               <Link to='/user/dashboard' ><button>Cancel</button></Link>
               <Link to='/user/register/5' >
                 <button>Back</button>
               </Link>
-              <Link to='/user/dashboard' ><button onClick={() => this.handleAllThingsAtOnce()} >Register</button></Link>
+              <Link to='/user/dashboard' ><button onClick={() => this.submit()} >Register</button></Link>
             </div>
 
           </div>
@@ -99,4 +121,5 @@ const mapDispatchToProps = {
   updateObjectOnState
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Part6)
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectStripe(Part6));

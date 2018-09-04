@@ -71,7 +71,7 @@ CREATE TABLE "participants"
 CREATE TABLE "attendants"
 (
     "attendee_id" serial primary key,
-    "group" varchar(120),
+    "group_id" varchar(120),
     "waver_p_signed" boolean,
     "waver_y_signed" boolean,
     "medical_waver_signed" boolean,

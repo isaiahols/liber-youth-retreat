@@ -2,38 +2,39 @@ require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
-const axios = require('axios')
-const aws = require('aws-sdk');
+// const axios = require('axios')
+const stripe = require("stripe");
 
 
 
 const rc = require('./Controllers/register_controller');
 const ac = require('./Controllers/auth_controller')
+const amazon = require('./Controllers/amazon_controller')
 const aw = require('./Middleware/auth_middleware')
 
-// // //Declarations// // //
+
+// // // Declarations // // //
 const app = express();
 const {
-    SERVER_PORT,
-    SECRET,
-    CONNECTION_STRING,
-    S3_BUCKET,
-    AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY,
+  SERVER_PORT,
+  SECRET,
+  CONNECTION_STRING,
+  STRIPE_SECRET,
 } = process.env;
+stripe(STRIPE_SECRET);
 
 
 // Database Connection
 massive(CONNECTION_STRING).then(db => {
-    app.set('db', db);
+  app.set('db', db);
 })
 
 // // // Middleware // // //
 app.use(express.json());
 app.use(session({
-    secret: SECRET,
-    resave: false,
-    saveUninitialized: true,
+  secret: SECRET,
+  resave: false,
+  saveUninitialized: true,
 }))
 
 
@@ -51,39 +52,24 @@ app.post('/api/register', rc.registerParticipant);
 
 
 // PHOTO UPLOADING //
-app.get('/sign-s3', (req, res) => {
+app.get('/sign-s3', amazon.awsS3);
 
-  aws.config = {
-    region: 'us-west-2',
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY
+
+// STRIPE //
+app.post("/charge", async (req, res) => {
+  try {
+    let { status } = await stripe.charges.create({
+      amount: 2000,
+      currency: "usd",
+      description: "An example charge",
+      source: req.body
+    });
+
+    res.json({ status });
+  } catch (err) {
+    res.status(500).end();
   }
-  
-  const s3 = new aws.S3();
-  const fileName = req.query['file-name'];
-  const fileType = req.query['file-type'];
-  const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: fileName,
-    Expires: 60,
-    ContentType: fileType,
-    ACL: 'public-read'
-  };
-
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
-      console.log(err);
-      return res.end();
-    }
-    const returnData = {
-      signedRequest: data,
-      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-    };
-
-    return res.send(returnData)
-  });
 });
-
 
 
 
@@ -111,6 +97,6 @@ app.get('/auth/logout', ac.logout);
 // // // Please Leave Me Alone!!! // // //
 
 app.listen(SERVER_PORT, () => {
-    console.log(`we are live on ${SERVER_PORT}`);
+  console.log(`we are live on ${SERVER_PORT}`);
 
 })

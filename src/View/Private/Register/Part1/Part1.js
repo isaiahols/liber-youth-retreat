@@ -104,10 +104,10 @@ class Part1 extends Component {
 
         // // // Calling Tile Builders // // //
         let mappedParticipants = usersParticipants.map(one => {
-            return <ParticipantTiles key={one.participant_id} participant={one} />
+            return <ParticipantTiles key={`p${one.participant_id}`} participant={one} />
         })
         let mappedCamps = camps.map(camp => {
-            return <CampTiles key={camp.camp_id} camp={camp} />
+            return <CampTiles key={`${camp.camp_id}`} camp={camp} />
         })
         let mappedGroups = groups.map(group => {
             return <GroupTiles key={group.group_id} group={group} />

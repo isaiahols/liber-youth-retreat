@@ -3,7 +3,7 @@ import { updateObjectOnState } from "../../Ducks/registration";
 import { connect } from 'react-redux';
 
 const ParticipantTiles = (props) => {
-    const { first_name, last_name, birthday, email } = props.participant
+    const { first_name, last_name, birthday, email, photo } = props.participant
 
     let handleSelect = () => {
         props.updateObjectOnState({ which: 'participant', content: props.participant })
@@ -11,7 +11,7 @@ const ParticipantTiles = (props) => {
 
     return (
         <div onClick={() => handleSelect()} >
-            <img src="" alt="" />
+            <img src={photo} alt="" />
             <h2>{`${first_name} ${last_name}`}</h2>
             <h3>Birthday: {birthday}</h3>
             {/* should be age not birthday... */}
@@ -22,5 +22,6 @@ const ParticipantTiles = (props) => {
         </div>
     )
 }
+
 
 export default connect(null, { updateObjectOnState })(ParticipantTiles)

@@ -69,9 +69,9 @@ module.exports = {
                     photo: p_photo,
                     size: p_size,
                     health_card_num: p_hcn,
-                    dietary_concerns: p_dc,
-                    medical_concerns: p_mc,
-                    comments: p_c,
+                    dietary_concerns: p_dc = 'Nothing to Worry About',
+                    medical_concerns: p_mc = 'Nothing to Worry About',
+                    comments: p_c = 'Not Going to Comment',
                     email_updates: p_eu,
                     order_books: p_ob,
                     display_profile: p_dp
