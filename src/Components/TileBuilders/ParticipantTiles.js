@@ -2,6 +2,8 @@ import React from 'react'
 import { updateObjectOnState } from "../../Ducks/registration";
 import { connect } from 'react-redux';
 
+import './ParticipantTiles.css';
+
 const ParticipantTiles = (props) => {
     const { first_name, last_name, birthday, email, photo } = props.participant
 
@@ -10,7 +12,7 @@ const ParticipantTiles = (props) => {
     }
 
     return (
-        <div onClick={() => handleSelect()} >
+        <div className="tiles" id='p-tiles' onClick={() => handleSelect()} >
             <img src={photo} alt="" />
             <h2>{`${first_name} ${last_name}`}</h2>
             <h3>Birthday: {birthday}</h3>

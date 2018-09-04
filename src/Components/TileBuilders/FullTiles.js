@@ -11,7 +11,7 @@ const FullTiles =(props) => {
     }
 
     return (
-        <div onClick={() => handleSelect()} >
+        <div className="tiles" id='full-tiles' onClick={() => handleSelect()} >
             <h2>{`${first_name} ${last_name}`}</h2>
             <h3>{email}</h3>
             <h3>{phone}</h3>

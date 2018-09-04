@@ -19,9 +19,9 @@ class App extends Component {
           <div className="App">
             <Nav />
             {routes}
-            <Elements>
+            {/* <Elements>
               <Part6 />
-            </Elements>
+            </Elements> */}
           </div>
         </StripeProvider>
       </HashRouter>

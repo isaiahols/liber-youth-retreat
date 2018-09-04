@@ -10,7 +10,7 @@ const CampTiles = (props) => {
     }
 
     return (
-        <div onClick={() => handleSelect()} >
+        <div className="tiles" id='c-tiles' onClick={() => handleSelect()} >
             <h2>{camp.title}</h2>
             <h3>{`From: ${camp.start_date} to ${camp.end_date}`}</h3>
             <h3>{`Near: ${camp.location}`}</h3>

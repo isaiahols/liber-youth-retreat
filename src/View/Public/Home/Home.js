@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 
+import './Home.css';
+
 
 export default class Home extends Component {
     render() {
         return (
             <div>
-                Home
+                <div className='top-area' >
+
+                    <h1>Liber Youth Retreat</h1>
+                    <h3>A Leadership Education Experience</h3>
+                </div>
             </div>
         )
     }

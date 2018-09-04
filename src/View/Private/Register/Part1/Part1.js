@@ -14,6 +14,8 @@ import ParticipantTiles from '../../../../Components/TileBuilders/ParticipantTil
 import CampTiles from "../../../../Components/TileBuilders/CampTiles";
 import GroupTiles from "../../../../Components/TileBuilders/GroupTiles";
 
+import './Part1.css'
+    ;
 class Part1 extends Component {
     state = {
         time: new Date(),
@@ -104,13 +106,25 @@ class Part1 extends Component {
 
         // // // Calling Tile Builders // // //
         let mappedParticipants = usersParticipants.map(one => {
-            return <ParticipantTiles key={`p${one.participant_id}`} participant={one} />
+            return (<ParticipantTiles
+                className='tiles'
+                key={`p${one.participant_id}`}
+                participant={one}
+            />)
         })
         let mappedCamps = camps.map(camp => {
-            return <CampTiles key={`${camp.camp_id}`} camp={camp} />
+            return (<CampTiles
+                className='tiles'
+                key={`${camp.camp_id}`}
+                camp={camp}
+            />)
         })
         let mappedGroups = groups.map(group => {
-            return <GroupTiles key={group.group_id} group={group} />
+            return (<GroupTiles
+                className='tiles'
+                key={group.group_id}
+                group={group}
+            />)
         })
 
         return (

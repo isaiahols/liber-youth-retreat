@@ -8,7 +8,7 @@ const GroupTiles = (props) => {
         updateNestedObject({ where: 'attendee', what: 'camp_id', val: group.group_id })
     }
     return (
-        <div onClick={()=>handleSelect()} >
+        <div className="tiles" id='g-tiles' onClick={()=>handleSelect()} >
             <h2>{group.title}</h2>
             <h3>{`Suggested age: ${group.ages}`}</h3>
             <h4>{group.description}</h4>
