@@ -41,10 +41,10 @@ class Part6 extends Component {
     let confirm = await axios.post(`/api/register`, { participant, emergency, guardian, attendee })
     console.log(JSON.stringify(confirm.data));
 
-    await this.props.updateObjectOnState({ which: 'participant', content: initialState.participant });
-    await this.props.updateObjectOnState({ which: 'guardian', content: initialState.guardian });
-    await this.props.updateObjectOnState({ which: 'emergency', content: initialState.emergency });
-    await this.props.updateObjectOnState({ which: 'attendee', content: initialState.attendee })
+    this.props.updateObjectOnState({ which: 'participant', content: initialState.participant });
+    this.props.updateObjectOnState({ which: 'guardian', content: initialState.guardian });
+    this.props.updateObjectOnState({ which: 'emergency', content: initialState.emergency });
+    this.props.updateObjectOnState({ which: 'attendee', content: initialState.attendee })
 
   }
 
@@ -72,7 +72,9 @@ class Part6 extends Component {
             {/* this is now the checkout section */}
 
             <Link to="/user/finished">
+            <div onClick={()=>this.handleAllThingsAtOnce()} >
               <Payment />
+            </div>
             </Link>
             <Link to='/user/register/5' >
               <button>Previous</button>

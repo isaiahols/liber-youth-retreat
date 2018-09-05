@@ -77,7 +77,8 @@ CREATE TABLE "attendants"
     "medical_waver_signed" boolean,
     "register_date" date not null default current_date,
     "camp_id" integer references camps(camp_id),
-    "participant_id" integer references participants(participant_id)
+    "participant_id" integer references participants(participant_id),
+    "self_register" boolean,
 );
 
 CREATE TABLE "emergency_contacts"

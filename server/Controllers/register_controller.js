@@ -82,7 +82,8 @@ module.exports = {
                     waver_y_signed,
                     medical_waver_signed,
                     register_date,
-                    camp_id: camp
+                    camp_id: camp,
+                    self_register
                 }
             },
             session: {
@@ -134,7 +135,7 @@ module.exports = {
 
         const p_id = participant[0].participant_id
 
-        let attendee = await db.add_attendee([group_id, waver_p_signed, waver_y_signed, medical_waver_signed, register_date, camp, p_id]).catch(err => console.log(err))
+        let attendee = await db.add_attendee([group_id, waver_p_signed, waver_y_signed, medical_waver_signed, register_date, self_register, camp, p_id]).catch(err => console.log(err))
 
         const a_id = attendee[0].attendee_id
 

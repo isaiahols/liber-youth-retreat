@@ -8,7 +8,6 @@ import {
     updateUser,
     updateNestedObject,
     updateObjectOnState,
-    getParticipants
 } from "../../../../Ducks/registration";
 import ParticipantTiles from '../../../../Components/TileBuilders/ParticipantTiles';
 import CampTiles from "../../../../Components/TileBuilders/CampTiles";
@@ -33,7 +32,6 @@ class Part1 extends Component {
                     console.log(err)
                 })
         }
-        // this.props.getParticipants('/api/user/participant')
     }
 
 
@@ -60,8 +58,8 @@ class Part1 extends Component {
 
     // // // Updating Reducer // // //
 
-    handleUpdate(updateObj) {
-        let newUpdateObj = { ...updateObj, where: 'participant', }
+    handleUpdate(updateObj, where = 'participant') {
+        let newUpdateObj = { ...updateObj, where }
         this.props.updateNestedObject(newUpdateObj);
     }
 
@@ -115,7 +113,7 @@ class Part1 extends Component {
         let mappedCamps = camps.map(camp => {
             return (<CampTiles
                 className='tiles'
-                key={`${camp.camp_id}`}
+                key={`c${camp.camp_id}`}
                 camp={camp}
             />)
         })
@@ -145,6 +143,12 @@ class Part1 extends Component {
                                     <h1>No Saved Campers</h1>
                                 </div>
                             )}
+
+                        <section>
+                            <h2>Are you registering</h2>
+                            <h3 onClick={() => { this.handleUpdate({ what: 'self_register', val: true }, 'attendee') }}>Yourself</h3>
+                            <h3 onClick={() => { this.handleUpdate({ what: 'self_register', val: false }, 'attendee') }}>Someone In Your Guardianship</h3>
+                        </section>
                         <section className="selectCamp">
                             <h1>Select a Camp</h1>
                             {mappedCamps}
@@ -278,7 +282,6 @@ const mapDispatchToProps = {
     updateUser,
     updateNestedObject,
     updateObjectOnState,
-    getParticipants
 }
 
 

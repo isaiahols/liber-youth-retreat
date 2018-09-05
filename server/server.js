@@ -57,23 +57,7 @@ app.get('/sign-s3', amazon.awsS3);
 
 
 // STRIPE //
-app.post("/charge", async (req, res) => {
-  try {
-    let { status } = await stripe.charges.create({
-      amount: 2000,
-      currency: "usd",
-      description: "An example charge",
-      source: req.body
-    });
-
-    res.json({ status });
-  } catch (err) {
-    res.status(500).end();
-  }
-});
-
-
-app.post('/api/payment', pc.handlePayment)
+app.post('/api/payment', pc.handlePayment);
 
 
 

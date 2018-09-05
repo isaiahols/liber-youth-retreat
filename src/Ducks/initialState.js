@@ -38,6 +38,7 @@ module.exports = {
         register_date: new Date(),
         camp_id: 0,
         participant_id: '',
+        self_register: false
     },
     user: {},
     usersGuardians: [],
