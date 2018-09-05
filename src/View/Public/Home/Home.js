@@ -8,9 +8,11 @@ export default class Home extends Component {
         return (
             <div>
                 <div className='top-area' >
+                    <div className='top-area-content' >
 
-                    <h1>Liber Youth Retreat</h1>
-                    <h3>A Leadership Education Experience</h3>
+                        <h1>Liber Youth Retreat</h1>
+                        <h3>A Leadership Education Experience</h3>
+                    </div>
                 </div>
             </div>
         )

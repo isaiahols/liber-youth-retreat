@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { CardElement, injectStripe } from 'react-stripe-elements';
 
 import { updateUser, updateNestedObject, updateObjectOnState } from "../../../../Ducks/registration";
-import initialState from '../../../../Ducks/initialState'
+import initialState from '../../../../Ducks/initialState';
+import Payment from '../../../../Components/Payments/Payment';
 
 class Part6 extends Component {
   // // // AUTHENTICATION CHECK // // //
@@ -21,19 +21,6 @@ class Part6 extends Component {
     }
   }
 
-  // // // STRIPE // // // 
-  async submit(ev) {
-    this.handleAllThingsAtOnce();
-
-    let { token } = await this.props.stripe.createToken({ name: "Name" });
-    let response = await fetch("/charge", {
-      method: "POST",
-      headers: { "Content-Type": "text/plain" },
-      body: token.id
-    });
-
-    if (response.ok) console.log("Purchase Complete!")
-  }
 
   // // // UPDATING REDUX // // //
   handleUpdate(updateObj) {
@@ -54,10 +41,10 @@ class Part6 extends Component {
     let confirm = await axios.post(`/api/register`, { participant, emergency, guardian, attendee })
     console.log(JSON.stringify(confirm.data));
 
-    let one = await this.props.updateObjectOnState({ which: 'participant', content: initialState.participant });
-    let two = await this.props.updateObjectOnState({ which: 'guardian', content: initialState.guardian });
-    let three = await this.props.updateObjectOnState({ which: 'emergency', content: initialState.emergency });
-    let four = await this.props.updateObjectOnState({ which: 'attendee', content: initialState.attendee })
+    await this.props.updateObjectOnState({ which: 'participant', content: initialState.participant });
+    await this.props.updateObjectOnState({ which: 'guardian', content: initialState.guardian });
+    await this.props.updateObjectOnState({ which: 'emergency', content: initialState.emergency });
+    await this.props.updateObjectOnState({ which: 'attendee', content: initialState.attendee })
 
   }
 
@@ -84,14 +71,15 @@ class Part6 extends Component {
 
             {/* this is now the checkout section */}
 
-            <div className="checkout">
-              <CardElement />
-              <Link to='/user/dashboard' ><button>Cancel</button></Link>
-              <Link to='/user/register/5' >
-                <button>Back</button>
-              </Link>
-              <Link to='/user/dashboard' ><button onClick={() => this.submit()} >Register</button></Link>
-            </div>
+            <Link to="/user/finished">
+              <Payment />
+            </Link>
+            <Link to='/user/register/5' >
+              <button>Previous</button>
+            </Link>
+            <Link to='/user/dashboard' >
+              <button>Cancel</button>
+            </Link>
 
           </div>
         ) : (
@@ -122,4 +110,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectStripe(Part6));
+export default connect(mapStateToProps, mapDispatchToProps)(Part6);

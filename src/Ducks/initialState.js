@@ -63,5 +63,9 @@ module.exports = {
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, fugiat amet natus eveniet quisquam possimus.'
         }
     ],
-    camps: []
+    camps: [],
+    costTable: {
+        camp1: 44433,
+        camp2: 23412
+    }
 }

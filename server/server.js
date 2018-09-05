@@ -8,9 +8,10 @@ const stripe = require("stripe");
 
 
 const rc = require('./Controllers/register_controller');
-const ac = require('./Controllers/auth_controller')
-const amazon = require('./Controllers/amazon_controller')
-const aw = require('./Middleware/auth_middleware')
+const ac = require('./Controllers/auth_controller');
+const amazon = require('./Controllers/amazon_controller');
+const aw = require('./Middleware/auth_middleware');
+const pc = require('./Controllers/payment_controller');
 
 
 // // // Declarations // // //
@@ -71,6 +72,8 @@ app.post("/charge", async (req, res) => {
   }
 });
 
+
+app.post('/api/payment', pc.handlePayment)
 
 
 

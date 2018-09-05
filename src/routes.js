@@ -21,6 +21,9 @@ import Part4 from "./View/Private/Register/Part4/Part4";
 import Part5 from "./View/Private/Register/Part5/Part5";
 import Part6 from "./View/Private/Register/Part6/Part6";
 
+// Error Pages
+import Page404 from './View/ErrorPages/404/404'
+
 export default (
     <Switch>
         <Route path='/' exact component={Home} />
@@ -41,6 +44,9 @@ export default (
         <Route path={`/user/register/4`} component={Part4} />
         <Route path={`/user/register/5`} component={Part5} />
         <Route path={`/user/register/6`} component={Part6} />
+
+        {/* Errors */}
+        <Route path='/' component={Page404} />
 
 
     </Switch>

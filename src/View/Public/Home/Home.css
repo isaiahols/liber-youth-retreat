@@ -4,6 +4,30 @@
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
     background-position: center; 
-    height: 100vh;
+    min-height: 100vh;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.top-area-content {
+    background: rgba(177, 159, 3, .2);
+    /* width: 90vw; */
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.top-area h1 {
+    font-size: 2.8em;
+}
+
+.top-area h3 {
+    margin-top: 10px;
+     font-size: 1.8;
 
 }
