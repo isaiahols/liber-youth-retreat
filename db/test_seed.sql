@@ -146,3 +146,13 @@ values
 
 select *
 from camps;
+
+select *
+from attendants a
+    join participants p on a.participant_id = p.participant_id
+    join participant_emergency pe on p.participant_id = pe.participant_id
+    join emergency_contacts ec on pe.emergency_id = ec.emergency_id
+where p.user_id = 1;
+
+select *
+from participants;

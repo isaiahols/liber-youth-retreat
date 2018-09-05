@@ -1,3 +1,9 @@
 .top-area{
-    
+    background-image: url('../../../assests//images/sunset-over-snowy-top-of-the-mountain-picjumbo-com.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    background-position: center; 
+    height: 100vh;
+
 }
