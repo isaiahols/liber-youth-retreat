@@ -9,14 +9,18 @@ import {
   getGuardian,
   getEmergency,
   getCamps,
+  getUsersAttendees,
   updateObjectOnState
 } from "../../../Ducks/registration";
 import initialState from '../../../Ducks/initialState';
+import UsersAttendeeTiles from '../../../Components/TileBuilders/UsersAttendeeTiles';
+
+import './Dashboard.css'
 
 
 class Dashboard extends Component {
   async componentDidMount() {
-    
+
     // Checking if Signed in
     if (!this.props.user.user_id) {
       axios.get('/api/user-data')
@@ -32,7 +36,8 @@ class Dashboard extends Component {
     this.props.getParticipants('/api/user/participant');
     this.props.getGuardian('/api/user/guardian');
     this.props.getEmergency('/api/user/emergency');
-    this.props.getCamps('/api/camps')
+    this.props.getCamps('/api/camps');
+    this.props.getUsersAttendees('/api/user/attendees');
 
     // Here I Am Clearing Redux for Participant and Form
     await this.props.updateObjectOnState({ which: 'participant', content: initialState.participant });
@@ -42,16 +47,28 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user, usersAttendees } = this.props
+
+    const mappedAttendees = usersAttendees.map(each => {
+      return <UsersAttendeeTiles key={each.attendee_id} each={each} />
+    })
+
     return (
       <div>
-        Dashboard
         {user.user_id ? (
           <div>
-
-            <Link to='/user/register/1' >
-              <button>Register</button>
-            </Link>
+            <section className='top-area'>
+              <div className="top-area-content">
+                <Link to='/user/register/1' className='linking'>
+                  <h1>Register</h1>
+                </Link>
+              </div>
+            </section>
+            {}
+            <section>
+              <h2>Your Current Registration</h2>
+              {mappedAttendees}
+            </section>
           </div>
           // get camps and select
 
@@ -64,11 +81,11 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
-  const { user, camps, groups } = state;
+  const { user, usersAttendees } = state;
   return {
     user,
-    camps,
-    groups,
+    usersAttendees
+
   }
 }
 
@@ -78,6 +95,7 @@ const mapDispatchToProps = {
   getGuardian,
   getEmergency,
   getCamps,
+  getUsersAttendees,
   updateObjectOnState
 }
 

@@ -28,6 +28,8 @@ stripe(STRIPE_SECRET);
 // Database Connection
 massive(CONNECTION_STRING).then(db => {
   app.set('db', db);
+  console.log('Connected to Database');
+
 })
 
 // // // Middleware // // //
@@ -47,6 +49,7 @@ app.get('/api/user/participant', rc.getParticipant);
 app.get('/api/user/guardian', rc.getGuardian);
 app.get('/api/user/emergency', rc.getEmergency);
 app.get('/api/camps', rc.getCamps);
+app.get('/api/user/attendees', rc.getUsersAttendees);
 
 // REGISTERING // 
 app.post('/api/register', rc.registerParticipant);
@@ -59,7 +62,9 @@ app.get('/sign-s3', amazon.awsS3);
 // STRIPE //
 app.post('/api/payment', pc.handlePayment);
 
-
+// UPDATE USER //
+app.put('/api/user/:name', rc.updateUsersName);
+// build delete for user
 
 
 

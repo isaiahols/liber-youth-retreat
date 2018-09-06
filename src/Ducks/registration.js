@@ -32,6 +32,9 @@ export default (state = initialState, action) => {
         case GET_CAMPS_FULFILLED:
             newState.camps = payload.data
             return newState;
+        case GET_USER_ATTENDEES_FULFILLED:
+            newState.usersAttendees = payload.data
+            return newState;
 
 
         case RESET_STATE:
@@ -48,6 +51,8 @@ export default (state = initialState, action) => {
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_NESTED_OBJECT = 'UPDATE_NESTED_OBJECT';
 const UPDATE_OBJECT_iN_STATE = 'UPDATE_OBJECT_iN_STATE';
+
+// FUNCTION TYPES //
 const GET_PARTICIPANT = 'GET_PARTICIPANT';
 const GET_PARTICIPANT_FULFILLED = 'GET_PARTICIPANT_FULFILLED';
 const GET_GUARDIAN = 'GET_GUARDIAN';
@@ -56,6 +61,9 @@ const GET_EMERGENCY = 'GET_EMERGENCY';
 const GET_EMERGENCY_FULFILLED = 'GET_EMERGENCY_FULFILLED';
 const GET_CAMPS = 'GET_CAMPS';
 const GET_CAMPS_FULFILLED = 'GET_CAMPS_FULFILLED';
+const GET_USER_ATTENDEES = 'GET_USER_ATTENDEES';
+const GET_USER_ATTENDEES_FULFILLED = 'GET_USER_ATTENDEES_FULFILLED';
+
 
 const RESET_STATE = 'RESET_STATE'
 
@@ -109,6 +117,12 @@ export const getEmergency = (url) => {
 export const getCamps = (url) => {
     return {
         type: GET_CAMPS,
+        payload: axios.get(url)
+    }
+}
+export const getUsersAttendees = (url) => {
+    return {
+        type: GET_USER_ATTENDEES,
         payload: axios.get(url)
     }
 }

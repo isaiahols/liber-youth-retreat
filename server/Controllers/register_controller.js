@@ -41,6 +41,31 @@ module.exports = {
 
     },
 
+    getUsersAttendees: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+        db.get_attendees_by_user_id([user_id]).then(resp => {
+            res.status(200).send(resp)
+        }).catch(err => {
+            res.status(500).send(err)
+        })
+
+    },
+
+    updateUsersName: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+        const { name } = req.params;
+
+        db.update_user_name([name, user_id]).then(resp => {
+            req.session.user = resp[0]
+            res.status(200).send(resp[0])
+        }).catch(err=>{
+            console.log('what the fu**? ', err);
+            
+        })
+    },
+
     registerParticipant: async (req, res) => {
         const {
             body: {
@@ -147,7 +172,7 @@ module.exports = {
 
 }
 
-// Saving order:
+// Saving register order:
 //      ([guardians, emergency_contact])
 //      participants
 //     ([attendants, participant_emergency])

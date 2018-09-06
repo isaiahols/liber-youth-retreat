@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from "react-redux";
 import DatePicker from 'react-mobile-datepicker';
+import MediaQuery from 'react-responsive';
+
 
 import {
     updateUser,
@@ -209,18 +211,23 @@ class Part1 extends Component {
                                 ) : (
                                         <h4>no date selected</h4>
                                     )}
-                                <DatePicker
-                                    value={this.state.time}
-                                    isOpen={this.state.isOpen}
-                                    onSelect={this.handleSelect}
-                                    onCancel={this.handleCancel}
-                                    theme='android-dark'
-                                    dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
-                                    confirmText='Select'
-                                    cancelText='Cancel'
-                                    max={new Date()}
-                                    customHeader="Choose Your Birthday"
-                                />
+                                <MediaQuery maxWidth={768}>
+                                    <DatePicker
+                                        value={this.state.time}
+                                        isOpen={this.state.isOpen}
+                                        onSelect={this.handleSelect}
+                                        onCancel={this.handleCancel}
+                                        theme='android-dark'
+                                        dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
+                                        confirmText='Select'
+                                        cancelText='Cancel'
+                                        max={new Date()}
+                                        customHeader="Choose Your Birthday"
+                                    />
+                                </MediaQuery>
+                                <MediaQuery minDeviceWidth={769} >
+                                    Nope
+                                </MediaQuery>
                                 <h3>Campers Email</h3>
                                 <input
                                     type="text"

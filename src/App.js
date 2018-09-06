@@ -14,7 +14,7 @@ class App extends Component {
       <HashRouter>
 
           <div className="App">
-            {/* <Nav /> */}
+            <Nav />
             {routes}
           </div>
       </HashRouter>

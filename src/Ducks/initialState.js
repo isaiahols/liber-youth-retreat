@@ -41,6 +41,7 @@ module.exports = {
         self_register: false
     },
     user: {},
+    usersAttendees: [],
     usersGuardians: [],
     usersEmergency: [],
     usersParticipants: [],

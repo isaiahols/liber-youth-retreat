@@ -36,6 +36,10 @@ class Part5 extends Component {
         <section>review stuff</section>
         {/* this will have three tiles displaying the info from the last four pages that will be clickable and will take you back to that section */}
         <section>
+          <h2>Please Confirm Info</h2>
+        </section>
+
+        <section>
           <h3>Would you like to receive occasional LYR updates</h3>
           <div>
             <h4 onClick={() => this.handleAnswer('email_updates', true)} >Yes</h4>
