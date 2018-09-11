@@ -6,6 +6,13 @@ import Dropzone from 'react-dropzone';
 import {v4 as randomString} from 'uuid';
 import { PacmanLoader } from 'react-spinners';
 
+import MaskedInput from 'react-text-mask';
+
+// Material-ui
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+
 import {
     updateUser,
     updateNestedObject

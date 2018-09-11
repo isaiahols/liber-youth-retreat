@@ -70,10 +70,12 @@ class Part5 extends Component {
 }
 
 function mapStateToProps(state) {
-  const { participant, user } = state;
+  const { participant, user, guardian, emergency } = state;
   return {
     camper: participant,
-    user
+    user,
+    guardian,
+    emergency
   }
 }
 

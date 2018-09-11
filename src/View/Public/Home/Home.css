@@ -1,3 +1,7 @@
+.home-page-grid-container {
+
+}
+
 .top-area{
     background-image: url('../../../assests//images/sunset-over-snowy-top-of-the-mountain-picjumbo-com.jpg');
     background-size: cover;
@@ -20,6 +24,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 20px;
 }
 
 .top-area h1 {
@@ -28,6 +33,63 @@
 
 .top-area h3 {
     margin-top: 10px;
-     font-size: 1.8;
-
+    font-size: 1.8;
+    
 }
+
+.lyr-info-container {
+    background: blue;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 15px;
+    border: 2px solid black;
+}
+
+h2 {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+p {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+img {
+    border-radius: 100px;
+    width: 150px;
+    margin: 10px 0 10px 0;
+}
+
+.info-tiles {
+    background: lightcyan;
+    min-height: 300px;
+    padding: 15px;
+    
+}
+.middle-tile {
+    display: grid;
+    grid-template-columns: 1fr 150px;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "title title"
+        "text photo"
+        "text text";
+    /* align-items: flex-end; */
+    background: pink;
+    /* float: right; */
+ }
+
+
+ #tile-middle-h2 {
+    grid-area: 'title';
+ }
+ #tile-middle-p {
+    grid-area: 'text';
+ }
+ #tile-middle-photo {
+    grid-area: 'photo';
+ }

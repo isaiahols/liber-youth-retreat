@@ -51,27 +51,36 @@ app.get('/api/user/emergency', rc.getEmergency);
 app.get('/api/camps', rc.getCamps);
 app.get('/api/user/attendees', rc.getUsersAttendees);
 
+
+
 // REGISTERING // 
 app.post('/api/register', rc.registerParticipant);
+
 
 
 // PHOTO UPLOADING //
 app.get('/sign-s3', amazon.awsS3);
 
 
+
 // STRIPE //
 app.post('/api/payment', pc.handlePayment);
 
-// UPDATE USER //
-app.put('/api/user/:name', rc.updateUsersName);
-// build delete for user
 
+
+// USER //
+
+// update
+app.put('/api/user/:name', rc.updateUsersName);
+// delete
+app.delete('/api/user/delete', rc.deleteUser);
 
 
 
 // authentication //
 
 app.get('/auth/callback', ac.login);
+// uuid v4 for unique user_id
 
 app.get('/api/user-data', aw.envCheck, ac.userData);
 

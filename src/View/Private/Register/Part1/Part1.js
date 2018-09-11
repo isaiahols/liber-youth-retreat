@@ -14,7 +14,18 @@ import {
 import ParticipantTiles from '../../../../Components/TileBuilders/ParticipantTiles';
 import CampTiles from "../../../../Components/TileBuilders/CampTiles";
 import GroupTiles from "../../../../Components/TileBuilders/GroupTiles";
+import Flatpickr from 'react-flatpickr'
 
+// import NumberFormat from 'react-number-format';
+import MaskedInput from 'react-text-mask';
+
+// Material-ui
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+
+
+import 'flatpickr/dist/themes/dark.css'
 import './Part1.css'
     ;
 class Part1 extends Component {
@@ -88,6 +99,8 @@ class Part1 extends Component {
             groups,
             camps
         } = this.props
+
+        const { time } = this.state;
 
         const monthMap = {
             '01': 'Jan',
@@ -189,12 +202,13 @@ class Part1 extends Component {
                                 />
                                 <h3>Campers Birthday</h3>
 
-                                <button
-                                    className="select-btn"
-                                    onClick={this.handleClick}>
-                                    Select Date
-                                </button>
-                                {birthday ? (
+
+                                <MediaQuery maxWidth={768}>
+                                    <button
+                                        className="select-btn"
+                                        onClick={this.handleClick}>
+                                        Select Date
+                                        </button>
                                     <input
                                         type="text"
                                         placeholder="dd/mm/yyyy"
@@ -207,13 +221,8 @@ class Part1 extends Component {
                                         }}
                                         value={birthday}
                                     />
-
-                                ) : (
-                                        <h4>no date selected</h4>
-                                    )}
-                                <MediaQuery maxWidth={768}>
                                     <DatePicker
-                                        value={this.state.time}
+                                        value={time}
                                         isOpen={this.state.isOpen}
                                         onSelect={this.handleSelect}
                                         onCancel={this.handleCancel}
@@ -226,8 +235,21 @@ class Part1 extends Component {
                                     />
                                 </MediaQuery>
                                 <MediaQuery minDeviceWidth={769} >
-                                    Nope
+                                    <Flatpickr data-enable-time
+                                        value={time}
+                                        onChange={time => { this.setState({ time }) }}
+                                        style={{
+                                            altInput: true,
+                                            altFormat: "F j, Y",
+                                            dateFormat: "Y-m-d",
+                                        }}
+                                    />
                                 </MediaQuery>
+                                {birthday ? (
+                                    <h4>helo</h4>
+                                ) : (
+                                        <h4>no date selected</h4>
+                                    )}
                                 <h3>Campers Email</h3>
                                 <input
                                     type="text"

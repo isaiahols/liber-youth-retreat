@@ -1,8 +1,27 @@
 import { createStore, applyMiddleware } from "redux";
 import reducer from './Ducks/registration';
 import thunk from "redux-thunk";
-import promise from 'redux-promise-middleware'
+import promise from 'redux-promise-middleware';
+// import { throttle } from 'lodash/throttle'
+
+// import { loadState, saveState } from './localStorage';
+
+// const persistedState = loadState();
 
 const middleware = applyMiddleware(thunk, promise())
 
-export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), middleware);
+const store = createStore(
+    reducer,
+    // persistedState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    middleware
+);
+
+
+// store.subscribe(throttle(() => {
+//     saveState({
+//         participant: store.getState().participant
+//     })
+// }, 1000));
+
+export default store;

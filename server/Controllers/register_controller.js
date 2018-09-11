@@ -60,10 +60,24 @@ module.exports = {
         db.update_user_name([name, user_id]).then(resp => {
             req.session.user = resp[0]
             res.status(200).send(resp[0])
-        }).catch(err=>{
+        }).catch(err => {
             console.log('what the fu**? ', err);
-            
+
         })
+    },
+    deleteUser: (req, res) => {
+        const db = req.app.get('db');
+        const { user_id } = req.session.user;
+
+        db.deleteUser([user_id])
+            .then(resp => {
+                console.log('deleted user');
+
+                res.status(200).send('deleted')
+            })
+            .catch(err => {
+                res.status(500).send(err)
+            })
     },
 
     registerParticipant: async (req, res) => {

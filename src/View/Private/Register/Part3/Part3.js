@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from "react-redux";
 
+import MaskedInput from 'react-text-mask';
+
+// Material-ui
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Grid from '@material-ui/core/Grid'
+
 import {
     updateUser,
     updateNestedObject,
@@ -24,6 +32,19 @@ class Part3 extends Component {
         }
         // this.props.getGuardian('/api/user/guardian')
     }
+
+    // // Phone Masked Input // //
+    TextMaskCustom() {
+
+        return (
+            <MaskedInput
+                mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                placeholderChar={'\u2000'}
+                showMask
+            />
+        );
+    }
+
 
     handleUpdate(updateObj) {
         let newUpdateObj = { ...updateObj, where: 'guardian', }
@@ -68,36 +89,73 @@ class Part3 extends Component {
                         <section>
                             <div>
                                 <h2>Please Add Guardian Info</h2>
-                                <h3>First Name</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
-                                    value={first_name}
-                                />
-                                <h3>Last Name</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
-                                    value={last_name}
-                                />
-                                <h3>Email</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => this.handleUpdate({ what: 'email', val: e.target.value })}
-                                    value={email}
-                                />
-                                <h3>Main Phone</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => this.handleUpdate({ what: 'phone', val: e.target.value })}
-                                    value={phone}
-                                />
-                                <h3>Other Phone</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => this.handleUpdate({ what: 'phone_2', val: e.target.value })}
-                                    value={phone_2}
-                                />
+
+                                <Grid container >
+                                    <Grid item xs={12} sm={6} >
+                                        <FormControl
+                                            margin="normal"
+                                        >
+                                            <InputLabel>First Name*</InputLabel>
+                                            <Input
+                                                onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
+                                                value={first_name}
+
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} >
+                                        <FormControl
+                                            margin="normal"
+                                        >
+                                            <InputLabel>Last Name*</InputLabel>
+                                            <Input
+                                                onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
+                                                value={last_name}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} >
+                                        <FormControl
+                                            margin=""
+                                        >
+                                            <InputLabel>Email*</InputLabel>
+                                            <Input
+                                                onChange={(e) => this.handleUpdate({ what: 'email', val: e.target.value })}
+                                                value={email}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid xs={12} sm={6}>
+
+                                        <FormControl
+                                            className='main-phone-container'
+                                            margin="normal"
+                                        >
+                                            <InputLabel>Main Phone*</InputLabel>
+                                            <Input
+                                                value={phone}
+                                                onChange={(e) => this.handleUpdate({ what: 'phone', val: e.target.value })}
+                                                id="formatted-text-mask-input"
+                                                inputComponent={this.TextMaskCustom}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid xs={12} sm={6}>
+
+                                        <FormControl className='main-phone-container'>
+                                            <InputLabel
+                                                htmlFor="formatted-text-mask-input"
+                                                margin="normal"
+                                            >Other Phone</InputLabel>
+                                            <Input
+                                                onChange={(e) => this.handleUpdate({ what: 'phone_2', val: e.target.value })}
+                                                value={phone_2}
+                                                id="formatted-text-mask-input"
+                                                inputComponent={this.TextMaskCustom}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
                             </div>
                         </section>
                         <div>

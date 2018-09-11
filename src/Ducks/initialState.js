@@ -19,8 +19,8 @@ module.exports = {
         first_name: '',
         last_name: '',
         email: '',
-        phone: '',
-        phone_2: ''
+        phone: '+1 (   )    -    ',
+        phone_2: '+1 (   )    -    '
 
     },
     emergency: {
@@ -28,7 +28,7 @@ module.exports = {
         first_name: '',
         last_name: '',
         email: '',
-        phone: '',
+        phone: '+1 (   )    -    ',
     },
     attendee: {
         group_id: 'education',

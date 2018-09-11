@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import { connect } from "react-redux";
 
+import MaskedInput from 'react-text-mask';
+
+// Material-ui
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Grid from '@material-ui/core/Grid'
+
 import {
     updateUser,
     updateNestedObject,
@@ -26,6 +34,18 @@ class Part4 extends Component {
                 })
         }
         // this.props.getEmergency('/api/user/emergency')
+    }
+
+    // // Phone Masked Input // //
+    TextMaskCustom() {
+
+        return (
+            <MaskedInput
+                mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                placeholderChar={'\u2000'}
+                showMask
+            />
+        );
     }
 
     handleSameClick(answer) {
@@ -75,38 +95,64 @@ class Part4 extends Component {
                     <h4 onClick={() => this.handleSameClick(true)}  >Yes</h4>
                 </div>
                 <section>
-                    <div>
-                        <h2>Please Add Emergency Contact Info</h2>
-                        <h3>First Name</h3>
-                        <input
-                            type="text"
-                            onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
-                            value={first_name}
-                        />
-                        <h3>Last Name</h3>
-                        <input
-                            type="text"
-                            onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
-                            value={last_name}
-                        />
-                        <h3>Email</h3>
-                        <input
-                            type="text"
-                            onChange={(e) => this.handleUpdate({ what: 'email', val: e.target.value })}
-                            value={email}
-                        />
-                        <h3>Cell Phone</h3>
-                        <input
-                            type="text"
-                            onChange={(e) => this.handleUpdate({ what: 'phone', val: e.target.value })}
-                            value={phone}
-                        />
-                    </div>
+                    {/* <div> */}
+                    <h2>Please Add Emergency Contact Info</h2>
+                    <Grid container >
+                        <Grid item xs={12} sm={6} >
+                            <FormControl
+                                margin="normal"
+                            >
+                                <InputLabel>First Name*</InputLabel>
+                                <Input
+                                    onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
+                                    value={first_name}
+
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} sm={6} >
+                            <FormControl
+                                margin="normal"
+                            >
+                                <InputLabel>Last Name*</InputLabel>
+                                <Input
+                                    onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
+                                    value={last_name}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item xs={12} >
+                            <FormControl
+                                margin=""
+                            >
+                                <InputLabel>Email*</InputLabel>
+                                <Input
+                                    onChange={(e) => this.handleUpdate({ what: 'email', val: e.target.value })}
+                                    value={email}
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid xs={12} sm={6}>
+
+                            <FormControl
+                                className='main-phone-container'
+                                margin="normal"
+                            >
+                                <InputLabel>Main Phone*</InputLabel>
+                                <Input
+                                    value={phone}
+                                    onChange={(e) => this.handleUpdate({ what: 'phone', val: e.target.value })}
+                                    id="formatted-text-mask-input"
+                                    inputComponent={this.TextMaskCustom}
+                                />
+                            </FormControl>
+                        </Grid>
+                    </Grid>
                 </section>
-                <div>
-                    <button>Add Another Emergency Contact</button>
-                    {/* This will */}
-                </div>
+                {/* <div>
+                        <button>Add Another Emergency Contact</button>
+                        This will
+                    </div> */}
                 <div>
                     <Link to="/user/register/5">
                         <button>Save and Continue</button>
