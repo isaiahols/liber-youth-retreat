@@ -6,10 +6,8 @@ import { connect } from "react-redux";
 import MaskedInput from 'react-text-mask';
 
 // Material-ui
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Grid from '@material-ui/core/Grid'
+import {FormControl, FormControlLabel, FormGroup, Input, InputLabel, Grid, Switch, Typography} from '@material-ui/core'
+
 
 import {
     updateUser,
@@ -47,12 +45,17 @@ class Part4 extends Component {
             />
         );
     }
+    // // same as toggle // //
+    handleSameClick = event => {
+        this.setState({ same: event.target.checked });
+    };
 
-    handleSameClick(answer) {
-        this.setState({
-            same: answer
-        })
-    }
+
+    // handleSameClick(answer) {
+    //     this.setState({
+    //         same: answer
+    //     })
+    // }
 
     handleUpdate(updateObj) {
         let newUpdateObj = { ...updateObj, where: 'emergency', }
@@ -89,11 +92,19 @@ class Part4 extends Component {
                     {/* use guardian tile builder here */}
                     {mappedEmergency}
                 </section>
-                <div>
-                    <h2>Same as Guardian</h2>
-                    <h4 onClick={() => this.handleSameClick(false)} >No</h4>
-                    <h4 onClick={() => this.handleSameClick(true)}  >Yes</h4>
-                </div>
+                <FormGroup>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={this.state.same}
+                                onChange={(e)=>this.handleSameClick(e)}
+                                value="checkedB"
+                                color="primary"
+                            />
+                        }
+                        label="Same As Guardian?"
+                    />
+                </FormGroup>
                 <section>
                     {/* <div> */}
                     <h2>Please Add Emergency Contact Info</h2>
@@ -159,7 +170,7 @@ class Part4 extends Component {
                     </Link>
                     {/* this will either do an axios POST or PUT depending on if it was auto filled */}
                     <Link to='/user/register/3' >
-                        <button>Back</button>
+                        <button>Previous</button>
                     </Link>
                     <Link to='/user/dashboard' >
                         <button>Cancel</button>

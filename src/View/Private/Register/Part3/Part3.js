@@ -6,10 +6,7 @@ import { connect } from "react-redux";
 import MaskedInput from 'react-text-mask';
 
 // Material-ui
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Grid from '@material-ui/core/Grid'
+import { Grid, InputLabel, Input, FormControl } from '@material-ui/core'
 
 import {
     updateUser,
@@ -164,7 +161,7 @@ class Part3 extends Component {
                             </Link>
                             {/* this will either post or put depending on if it was auto filled */}
                             <Link to='/user/register/2' >
-                                <button>Back</button>
+                                <button>Previous</button>
                             </Link>
                             <Link to='/user/dashboard' >
                                 <button>Cancel</button>

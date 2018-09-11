@@ -6,7 +6,7 @@ module.exports = {
         email: '',
         gender: '',
         photo: '',
-        size: '',
+        size: 'XL',
         health_card_num: '',
         dietary_concerns: '',
         medical_concerns: '',
@@ -19,8 +19,8 @@ module.exports = {
         first_name: '',
         last_name: '',
         email: '',
-        phone: '+1 (   )    -    ',
-        phone_2: '+1 (   )    -    '
+        phone: '(   )    -    ',
+        phone_2: '(   )    -    '
 
     },
     emergency: {
@@ -28,7 +28,7 @@ module.exports = {
         first_name: '',
         last_name: '',
         email: '',
-        phone: '+1 (   )    -    ',
+        phone: '(   )    -    ',
     },
     attendee: {
         group_id: 'education',

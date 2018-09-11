@@ -20,9 +20,10 @@ import Flatpickr from 'react-flatpickr'
 import MaskedInput from 'react-text-mask';
 
 // Material-ui
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import Input from '@material-ui/core/Input';
+// import InputLabel from '@material-ui/core/InputLabel';
+import { Grid, FormControl, Input, InputLabel } from '@material-ui/core'
 
 
 import 'flatpickr/dist/themes/dark.css'
@@ -174,32 +175,32 @@ class Part1 extends Component {
                         </section>
                         <section>
                             <div className="ParticipantFields">
-                                <h3>Campers First Name</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => {
-                                        this.handleUpdate(
-                                            {
-                                                what: 'first_name',
-                                                val: e.target.value
-                                            })
-                                    }}
-                                    onClick={() => this.handleClickToEdit('first_name')}
-                                    value={first_name}
-                                />
-                                <h3>Campers Last Name</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => {
-                                        this.handleUpdate(
-                                            {
-                                                what: 'last_name',
-                                                val: e.target.value
-                                            })
-                                    }}
-                                    onClick={() => this.handleClickToEdit('last_name')}
-                                    value={last_name}
-                                />
+                                <Grid container >
+                                    <Grid item xs={12} sm={6} >
+                                        <FormControl
+                                            margin="normal"
+                                        >
+                                            <InputLabel>First Name*</InputLabel>
+                                            <Input
+                                                onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
+                                                value={first_name}
+
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} >
+                                        <FormControl
+                                            margin="normal"
+                                        >
+                                            <InputLabel>Last Name*</InputLabel>
+                                            <Input
+                                                onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
+                                                value={last_name}
+                                            />
+                                        </FormControl>
+                                    </Grid>
+                                </Grid>
+
                                 <h3>Campers Birthday</h3>
 
 
