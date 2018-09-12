@@ -1,0 +1,19 @@
+.menu-holder {
+    /* border-radius: 100px; */
+    /* background: white; */
+    /* height: 45px;
+    width: 45px; */
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}
+
+.open-menu-container {
+    
+}
+
+#close-icon {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+}

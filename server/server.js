@@ -12,6 +12,7 @@ const ac = require('./Controllers/auth_controller');
 const amazon = require('./Controllers/amazon_controller');
 const aw = require('./Middleware/auth_middleware');
 const pc = require('./Controllers/payment_controller');
+const nc = require('./Controllers/non_user_controller');
 
 
 // // // Declarations // // //
@@ -75,6 +76,9 @@ app.put('/api/user/:name', rc.updateUsersName);
 // delete
 app.delete('/api/user/delete', rc.deleteUser);
 
+
+// MAILING LIST //
+app.post('/api/request-info', nc.addToReqestList)
 
 
 // authentication //

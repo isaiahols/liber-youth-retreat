@@ -8,6 +8,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ShareIcon from '@material-ui/icons/Share';
 
+import './Footer.css';
+
 const styles = {
     root: {
         width: "100vw",
@@ -33,6 +35,7 @@ class SimpleBottomNavigation extends React.Component {
                 onChange={this.handleChange}
                 showLabels
                 className={classes.root}
+                id='footer-container'
             >
                 <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
                 <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />

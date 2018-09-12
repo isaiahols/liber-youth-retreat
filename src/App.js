@@ -6,24 +6,30 @@ import './App.css';
 
 import routes from './routes';
 import Nav from './Components/Nav/Nav';
+import MyBurger from './Components/Nav/MyBurgerMenu';
 import Burger from './Components/Nav/BurgerMenu';
 import Footer from './Components/Footer/Footer';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBars, faTimes)
+
 const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#ff4400',
+      main: '#479761',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#0066ff',
-      main: '#0044ff',
+      // light: '#0066ff',
+      main: '#A16E83',
       // dark: will be calculated from palette.secondary.main,
-      contrastText: '#ffcc00',
+      // contrastText: '#ffcc00',
     },
   },
 });
@@ -38,15 +44,16 @@ class App extends Component {
           <div className="App">
             <CssBaseline />
             {/* <Nav /> */}
+            <MyBurger />
             <div id="outer-container">
-              <Burger
+              {/* <Burger
                 id='burger-place'
                 pageWrapId={"page-wrap"}
                 outerContainerId={"outer-container"}
               // noOverlay={false}
-              />
-              <main id="page-wrap">
-              </main>
+              /> */}
+              {/* <main id="page-wrap">
+              </main> */}
             </div>
             {routes}
             <Footer />

@@ -27,11 +27,12 @@
 
 .tile-outer {
     padding: 30px;
+    margin: 15px 0;
 }
 
 .tile-title{
     /* background: blue; */
-    height: 100px;
+    min-height: 100px;
     padding-bottom:10px;
     /* Not working */
 }
@@ -42,4 +43,19 @@
 
 #send-info-container {
     padding: 20px;
+}
+
+#more-info-container {
+    text-align: center;
+    padding: 25px;
+}
+
+.quote-container {
+    /* margin: 10px; */
+    padding: 25px;
+    margin-bottom: 15px;
+}
+
+.book-list-container {
+    /* background:  */
 }
