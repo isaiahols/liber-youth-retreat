@@ -19,6 +19,7 @@
     "react-flatpickr": "^3.6.4",
     "react-mobile-datepicker": "^3.0.12",
     "react-number-format": "^3.5.2",
+    "react-parallax": "^1.8.0",
     "react-redux": "^5.0.7",
     "react-responsive": "^5.0.0",
     "react-router-dom": "^4.3.1",

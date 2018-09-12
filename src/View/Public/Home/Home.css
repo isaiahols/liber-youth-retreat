@@ -72,12 +72,12 @@ img {
 }
 .middle-tile {
     display: grid;
-    grid-template-columns: 1fr 150px;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas: 
         "title title"
         "text photo"
-        "text text";
+        "text photo";
     /* align-items: flex-end; */
     background: pink;
     /* float: right; */

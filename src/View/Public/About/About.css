@@ -1,3 +1,41 @@
+#about-top-image {
+    background-image: url('../../../assests/images/negative-space-mountain-blue-sky-clouds-jamie-street.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    min-height: 100vh;
+    text-align: center;
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.top-text-background {
+    background: rgba(177, 159, 3, .2);
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.top-text {
+
+}
+
+.tile-outer {
+    padding: 30px;
+}
+
+.tile-title{
+    /* background: blue; */
+    height: 100px;
+    padding-bottom:10px;
+    /* Not working */
+}
+
 #input-with-icon-grid {
     
 }

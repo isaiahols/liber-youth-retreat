@@ -20,10 +20,14 @@ import Flatpickr from 'react-flatpickr'
 import MaskedInput from 'react-text-mask';
 
 // Material-ui
-// import FormControl from '@material-ui/core/FormControl';
-// import Input from '@material-ui/core/Input';
-// import InputLabel from '@material-ui/core/InputLabel';
-import { Grid, FormControl, Input, InputLabel } from '@material-ui/core'
+import {
+    Grid,
+    FormControl,
+    Input,
+    InputLabel,
+    Paper,
+    Typography
+} from '@material-ui/core'
 
 
 import 'flatpickr/dist/themes/dark.css'
@@ -175,102 +179,137 @@ class Part1 extends Component {
                         </section>
                         <section>
                             <div className="ParticipantFields">
-                                <Grid container >
-                                    <Grid item xs={12} sm={6} >
-                                        <FormControl
-                                            margin="normal"
-                                        >
-                                            <InputLabel>First Name*</InputLabel>
-                                            <Input
-                                                onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
-                                                value={first_name}
+                                <Paper >
+                                    <Grid container
+                                        spacing={8}
+                                        direction="row"
+                                        justify="center"
+                                        alignItems="flex-end"
+                                    >
+                                        {/* <Grid item xs={3} sm={4}> */}
+                                        {/* <Typography variant="display2">Hello</Typography> */}
+                                        {/* </Grid> */}
+                                        <Grid item xs={12} sm={6} >
+                                            <Paper
+                                                style={{
+                                                    height: "100px",
+                                                }}
+                                            >
+                                                <Grid
+                                                    container
+                                                    spacing={8}
+                                                    direction="row"
+                                                    justify="center"
+                                                    alignItems="flex-end"
+                                                >
+                                                    {/* <Grid container> */}
+                                                    {/* <Grid item xs={3} ></Grid> */}
+                                                    {/* <Grid item xs={6} > */}
+                                                    <FormControl
+                                                        margin="normal"
 
-                                            />
-                                        </FormControl>
+                                                    >
+                                                        <InputLabel>First Name*</InputLabel>
+                                                        <Input
+                                                            onChange={(e) => this.handleUpdate({ what: 'first_name', val: e.target.value })}
+                                                            value={first_name}
+                                                            onClick={() => this.handleClickToEdit('first_name')
+                                                            }
+                                                        />
+                                                    </FormControl>
+                                                    {/* </Grid>
+                                                </Grid> */}
+                                                </Grid>
+                                            </Paper>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6} >
+                                            <Paper>
+
+                                                <FormControl
+                                                    margin="normal"
+                                                >
+                                                    <InputLabel>Last Name*</InputLabel>
+                                                    <Input
+                                                        onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
+                                                        value={last_name}
+                                                        onClick={() => this.handleClickToEdit('first_name')}
+                                                    />
+                                                </FormControl>
+                                            </Paper>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={12} sm={6} >
-                                        <FormControl
-                                            margin="normal"
-                                        >
-                                            <InputLabel>Last Name*</InputLabel>
-                                            <Input
-                                                onChange={(e) => this.handleUpdate({ what: 'last_name', val: e.target.value })}
-                                                value={last_name}
-                                            />
-                                        </FormControl>
-                                    </Grid>
-                                </Grid>
 
-                                <h3>Campers Birthday</h3>
+                                    <h3>Campers Birthday</h3>
 
 
-                                <MediaQuery maxWidth={768}>
-                                    <button
-                                        className="select-btn"
-                                        onClick={this.handleClick}>
-                                        Select Date
+                                    <MediaQuery maxWidth={768}>
+                                        <button
+                                            className="select-btn"
+                                            onClick={this.handleClick}>
+                                            Select Date
                                         </button>
+                                        <input
+                                            type="text"
+                                            placeholder="dd/mm/yyyy"
+                                            onChange={(e) => {
+                                                this.handleUpdate(
+                                                    {
+                                                        what: 'birthday',
+                                                        val: e.target.value.replace('/', '')
+                                                    })
+                                            }}
+                                            value={birthday}
+                                        />
+                                        <DatePicker
+                                            value={time}
+                                            isOpen={this.state.isOpen}
+                                            onSelect={this.handleSelect}
+                                            onCancel={this.handleCancel}
+                                            theme='android-dark'
+                                            dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
+                                            confirmText='Select'
+                                            cancelText='Cancel'
+                                            max={new Date()}
+                                            customHeader="Choose Your Birthday"
+                                        />
+                                    </MediaQuery>
+                                    <MediaQuery minDeviceWidth={769} >
+                                        <Flatpickr data-enable-time
+                                            value={time}
+                                            onChange={time => { this.setState({ time }) }}
+                                            style={{
+                                                altInput: true,
+                                                altFormat: "F j, Y",
+                                                dateFormat: "Y-m-d",
+                                            }}
+                                        />
+                                    </MediaQuery>
+                                    {birthday ? (
+                                        <h4>helo</h4>
+                                    ) : (
+                                            <h4>no date selected</h4>
+                                        )}
+                                    <h3>Campers Email</h3>
                                     <input
                                         type="text"
-                                        placeholder="dd/mm/yyyy"
                                         onChange={(e) => {
                                             this.handleUpdate(
                                                 {
-                                                    what: 'birthday',
-                                                    val: e.target.value.replace('/', '')
+                                                    what: 'email',
+                                                    val: e.target.value
                                                 })
                                         }}
-                                        value={birthday}
+                                        onClick={() => this.handleClickToEdit('email')}
+                                        value={email}
                                     />
-                                    <DatePicker
-                                        value={time}
-                                        isOpen={this.state.isOpen}
-                                        onSelect={this.handleSelect}
-                                        onCancel={this.handleCancel}
-                                        theme='android-dark'
-                                        dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
-                                        confirmText='Select'
-                                        cancelText='Cancel'
-                                        max={new Date()}
-                                        customHeader="Choose Your Birthday"
-                                    />
-                                </MediaQuery>
-                                <MediaQuery minDeviceWidth={769} >
-                                    <Flatpickr data-enable-time
-                                        value={time}
-                                        onChange={time => { this.setState({ time }) }}
-                                        style={{
-                                            altInput: true,
-                                            altFormat: "F j, Y",
-                                            dateFormat: "Y-m-d",
-                                        }}
-                                    />
-                                </MediaQuery>
-                                {birthday ? (
-                                    <h4>helo</h4>
-                                ) : (
-                                        <h4>no date selected</h4>
-                                    )}
-                                <h3>Campers Email</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => {
-                                        this.handleUpdate(
-                                            {
-                                                what: 'email',
-                                                val: e.target.value
-                                            })
-                                    }}
-                                    onClick={() => this.handleClickToEdit('email')}
-                                    value={email}
-                                />
-                                <div>
-                                    <h3>Gender</h3>
-                                    <h4
-                                        onClick={() => this.handleGender('female')} >Female</h4>
-                                    <h4
-                                        onClick={() => this.handleGender('male')} >Male</h4>
-                                </div>
+                                    <div>
+                                        <h3>Gender</h3>
+                                        <h4
+                                            onClick={() => this.handleGender('female')} >Female</h4>
+                                        <h4
+                                            onClick={() => this.handleGender('male')} >Male</h4>
+                                    </div>
+                                </Paper>
                             </div>
                             <div>
                                 <Link to="/user/register/2">

@@ -246,13 +246,7 @@ class Part2 extends Component {
                                         <FormControlLabel value="XS" control={<Radio />} label="Extra Small" />
                                     </RadioGroup>
                                 </FormControl>
-                                {/* <h3>T-Shirt size</h3>
-                                All have an onClick
-                                <h4 onClick={() => this.handleSize('XS')} >XS</h4>
-                                <h4 onClick={() => this.handleSize('S')} >S</h4>
-                                <h4 onClick={() => this.handleSize('M')} >M</h4>
-                                <h4 onClick={() => this.handleSize('L')} >L</h4>
-                                <h4 onClick={() => this.handleSize('XL')} >XL</h4> */}
+                                
                             </div>
                             <div>
                                 <h2>Order Books Now</h2>
