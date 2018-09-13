@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from "react-redux";
 import { updateNestedObject } from "../../Ducks/registration";
 
-import { Card, CardHeader, CardMedia, CardContent, Typography, Grid } from '@material-ui/core';
+import { Card, CardHeader, CardMedia, CardContent, Typography, Grid, CardActionArea } from '@material-ui/core';
 
 import './CampTiles.css';
 
@@ -18,22 +18,29 @@ const CampTiles = (props) => {
             <Card className="tiles"
                 id='c-tiles'
                 onClick={() => handleSelect()}
+                style={{
+                    width: "80vw"
+                }}
+                raised={true}
             >
-                <CardHeader
-                    title={camp.title}
-                    subheader={`Starting ${camp.start_date}`}
-                />
-                <CardContent>
-                    <Typography variant='body2' >
-                        {camp.description}
-                    </Typography>
-                    <Typography variant='caption' >
-                        {`Near: ${camp.location}`}
-                    </Typography>
-                </CardContent>
-                {/* <CardMedia /> */}
+                <CardActionArea>
+
+                    <CardHeader
+                        title={camp.title}
+                        subheader={`Starting ${camp.start_date}`}
+                        style={{ width: "80vw" }}
+                    />
+                    <CardContent>
+                        <Typography variant='body2' >
+                            {camp.description}
+                        </Typography>
+                        <Typography variant='caption' >
+                            {`Near: ${camp.location}`}
+                        </Typography>
+                    </CardContent>
 
 
+                </CardActionArea>
             </Card>
         </Grid>
     )

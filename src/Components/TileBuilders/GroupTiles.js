@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from "react-redux";
 import { updateNestedObject } from "../../Ducks/registration";
 
-import { Card, CardHeader, CardMedia, CardContent, Typography, Grid } from '@material-ui/core';
+import { Card, CardHeader, CardMedia, CardContent, Typography, Grid, CardActionArea } from '@material-ui/core';
 
 const GroupTiles = (props) => {
     const { group, updateNestedObject } = props
@@ -11,23 +11,27 @@ const GroupTiles = (props) => {
     }
     return (
         <Grid item xs={12}>
-            <Card 
+            <Card
                 className="tiles"
                 id='g-tiles'
                 onClick={() => handleSelect()}
                 style={{
                     width: "80vw"
                 }}
+                raised={true}
             >
-                <CardHeader
-                    title={group.title}
-                    subheader={`Suggested age: ${group.age}`}
-                />
-                <CardContent>
-                    <Typography variant='body2' >
-                        {group.description}
-                    </Typography>
-                </CardContent>
+                <CardActionArea>
+
+                    <CardHeader
+                        title={group.title}
+                        subheader={`Suggested age: ${group.age}`}
+                    />
+                    <CardContent>
+                        <Typography variant='body2' >
+                            {group.description}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
             </Card>
         </Grid>
     )

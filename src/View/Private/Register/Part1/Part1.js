@@ -29,7 +29,11 @@ import {
     InputLabel,
     Paper,
     Typography,
-    Button
+    Button,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -41,7 +45,16 @@ const styles = theme => ({
     tiles: {
         maxWidth: 600,
         marginTop: theme.spacing.unit,
-    }
+    },
+    root: {
+        display: 'flex',
+    },
+    formControl: {
+        margin: theme.spacing.unit * 3,
+    },
+    group: {
+        margin: `${theme.spacing.unit}px 0`,
+    },
 })
 
 
@@ -102,8 +115,8 @@ class Part1 extends Component {
         this.props.updateNestedObject(newUpdateObj);
     }
 
-    handleGender(gender) {
-        this.handleUpdate({ what: 'gender', val: gender })
+    handleGender = (event) => {
+        this.handleUpdate({ what: 'gender', val: event.target.value })
     }
 
     handleClickToEdit(what) {
@@ -119,7 +132,8 @@ class Part1 extends Component {
                 first_name,
                 last_name,
                 birthday,
-                email
+                email,
+                gender
             },
             usersParticipants,
             groups,
@@ -173,21 +187,59 @@ class Part1 extends Component {
             <div>
                 {user.user_id ? (
                     <div>
-                        <section>
-                            <h1>Begin Registration</h1>
-                        </section>
+                        <Paper>
+                            <Typography
+                                variant='display3'
+                                align='center'
+                                style={{
+                                    margin: '60px 0'
+                                }}
+                            >
+                                Begin Registration
+                            </Typography>
+                        </Paper>
                         {usersParticipants[0] ? (
-                            <section className="savedParts">
-                                <h2>Select Saved Camper or Fill Out Below to Add a New Camper</h2>
-                                {mappedParticipants}
-                            </section>
+                            <Paper
+                                className="savedParts"
+                                style={{
+                                    padding: 30,
+                                    margin: '15px 0'
+                                }}
+                            >
+                                <Typography
+                                    variant='display2'
+                                    align='center'
+                                    style={{
+                                        margin: '60px 0'
+                                    }}
+                                >
+                                    Select Saved Camper
+                                </Typography>
+                                <Grid
+                                    container
+                                    spacing={24}
+                                    direction='column'
+                                    justify="center"
+                                    alignItems='center'
+                                >
+                                    {mappedParticipants}
+                                    <Typography
+                                        variant='body1'
+                                        align='center'
+                                        style={{
+                                            margin: '15px 0'
+                                        }}
+                                    >
+                                        or Add New Camper Below
+                                </Typography>
+                                </Grid>
+                            </Paper>
 
                         ) : (
                                 <div>
                                     <h1>No Saved Campers</h1>
                                 </div>
                             )}
-                        Paper
                         <Paper
                             style={{
                                 padding: 30,
@@ -353,80 +405,156 @@ class Part1 extends Component {
                                             Campers Birthday
                                     </Typography>
                                     </Grid>
-                                </Grid>
-                                <h3>Campers Birthday</h3>
-
-
-                                <MediaQuery maxWidth={768}>
-                                    
-
-                                    <button
-                                        className="select-btn"
-                                        onClick={this.handleClick}>
-                                        Select Date
-                                        </button>
-                                    <input
-                                        type="text"
-                                        placeholder="dd/mm/yyyy"
-                                        onChange={(e) => {
-                                            this.handleUpdate(
-                                                {
-                                                    what: 'birthday',
-                                                    val: e.target.value.replace('/', '')
-                                                })
-                                        }}
-                                        value={birthday}
-                                    />
-                                    <DatePicker
-                                        value={time}
-                                        isOpen={this.state.isOpen}
-                                        onSelect={this.handleSelect}
-                                        onCancel={this.handleCancel}
-                                        theme='android-dark'
-                                        dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
-                                        confirmText='Select'
-                                        cancelText='Cancel'
-                                        max={new Date()}
-                                        customHeader="Choose Your Birthday"
-                                    />
-                                </MediaQuery>
-                                <MediaQuery minDeviceWidth={769} >
-                                    <Flatpickr data-enable-time
-                                        value={time}
-                                        onChange={time => { this.setState({ time }) }}
+                                    <MediaQuery maxWidth={768}>
+                                        <DatePicker
+                                            value={time}
+                                            isOpen={this.state.isOpen}
+                                            onSelect={this.handleSelect}
+                                            onCancel={this.handleCancel}
+                                            theme='android-dark'
+                                            dateFormat={['YYYY', ['MM', (month) => monthMap[month]], 'DD']}
+                                            confirmText='Select'
+                                            cancelText='Cancel'
+                                            max={new Date()}
+                                            customHeader="Choose Your Birthday"
+                                        />
+                                    </MediaQuery>
+                                    <MediaQuery minDeviceWidth={769} >
+                                        <Flatpickr data-enable-time
+                                            value={time}
+                                            onChange={time => { this.setState({ time }) }}
+                                            style={{
+                                                altInput: true,
+                                                altFormat: "F j, Y",
+                                                dateFormat: "Y-m-d",
+                                            }}
+                                        />
+                                    </MediaQuery>
+                                    <Grid item xs={8} sm={6}
                                         style={{
-                                            altInput: true,
-                                            altFormat: "F j, Y",
-                                            dateFormat: "Y-m-d",
+                                            height: "80px",
                                         }}
-                                    />
-                                </MediaQuery>
-                                {birthday ? (
-                                    <h4>helo</h4>
-                                ) : (
-                                        <h4>no date selected</h4>
-                                    )}
-                                <h3>Campers Email</h3>
-                                <input
-                                    type="text"
-                                    onChange={(e) => {
-                                        this.handleUpdate(
-                                            {
-                                                what: 'email',
-                                                val: e.target.value
-                                            })
-                                    }}
-                                    onClick={() => this.handleClickToEdit('email')}
-                                    value={email}
-                                />
-                                <div>
-                                    <h3>Gender</h3>
-                                    <h4
-                                        onClick={() => this.handleGender('female')} >Female</h4>
-                                    <h4
-                                        onClick={() => this.handleGender('male')} >Male</h4>
-                                </div>
+                                    >
+                                        <Grid
+                                            container
+                                            spacing={8}
+                                            direction="row"
+                                            justify="center"
+                                            alignItems="flex-end"
+                                        >
+                                            {birthday ? (
+                                                <FormControl
+                                                    margin="normal"
+                                                    fullWidth={true}
+                                                >
+                                                    <InputLabel>First Name*</InputLabel>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="dd/mm/yyyy"
+                                                        onChange={(e) => {
+                                                            this.handleUpdate(
+                                                                {
+                                                                    what: 'birthday',
+                                                                    val: e.target.value.replace('/', '')
+                                                                })
+                                                        }}
+                                                        value={birthday}
+                                                        required={true}
+                                                        style={{
+                                                            altInput: true,
+                                                            altFormat: "F j, Y",
+                                                            dateFormat: "Y-m-d",
+                                                        }}
+                                                    />
+                                                </FormControl>
+                                            ) : (
+                                                    <Button
+                                                        onClick={this.handleClick}
+                                                        color='primary'
+                                                        variant="contained"
+                                                    >
+                                                        Select Date
+                                        </Button>
+                                                )}
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid item xs={8} sm={6}
+                                        style={{
+                                            height: "80px",
+                                        }}
+                                    >
+                                        <Grid
+                                            container
+                                            spacing={8}
+                                            direction="row"
+                                            justify="center"
+                                            alignItems="flex-end"
+                                        >
+
+                                            <FormControl
+                                                margin="normal"
+                                                fullWidth={true}
+                                            >
+                                                <InputLabel>Camper's Email*</InputLabel>
+                                                <Input
+                                                    onChange={(e) => {
+                                                        this.handleUpdate(
+                                                            {
+                                                                what: 'email',
+                                                                val: e.target.value
+                                                            })
+                                                    }}
+                                                    onClick={() => this.handleClickToEdit('email')}
+                                                    value={email}
+                                                />
+                                            </FormControl>
+
+                                        </Grid>
+                                    </Grid>
+                                    <FormControl
+                                        component="fieldset"
+                                        className={classes.formControl}
+                                    >
+                                        <FormLabel component="legend">Gender</FormLabel>
+                                        <RadioGroup
+                                            aria-label="Gender"
+                                            name="gender1"
+                                            className={classes.group}
+                                            value={gender}
+                                            onChange={this.handleGender}
+                                        >
+                                            <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                            <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Grid>
                             </Paper>
+                            <Grid item xs={8} sm={6}
+                                style={{
+                                    height: "80px",
+                                }}
+                            >
+                                <Grid
+                                    container
+                                    spacing={8}
+                                    direction="row"
+                                    justify="center"
+                                >
+                                    <Button
+                                        component={Link}
+                                        to="/user/dashboard"
+                                    >
+                                        Cancel
+                                            </Button>
+                                    <Button
+                                        component={Link}
+                                        to="/user/register/2"
+                                    >
+                                        Save and Continue
+                                    </Button>
+                                </Grid>
+                            </Grid>
                             <div>
                                 <Link to="/user/register/2">
                                     <button>Save and Continue</button>
