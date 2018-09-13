@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
+import Login from '../Login/Login'
+import Logout from '../Logout/Logout'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -98,6 +100,24 @@ export default class NewBurger extends Component {
                                     <Link to='/legal' >
                                         <Typography variant='title'>
                                             Legal
+                                    </Typography>
+                                    </Link>
+
+                                </Paper>
+                                <Paper>
+                                    <Link to='/login' >
+                                    <Login/>
+                                        <Typography variant='title'>
+                                            Login
+                                    </Typography>
+                                    </Link>
+
+                                </Paper>
+                                <Paper>
+                                    <Link to='/logout' >
+                                    <Logout/>
+                                        <Typography variant='title'>
+                                            Logout
                                     </Typography>
                                     </Link>
 
