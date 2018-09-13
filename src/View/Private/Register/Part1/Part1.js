@@ -447,7 +447,7 @@ class Part1 extends Component {
                                                     margin="normal"
                                                     fullWidth={true}
                                                 >
-                                                    <InputLabel>First Name*</InputLabel>
+                                                    <InputLabel>Birth Date*</InputLabel>
                                                     <Input
                                                         type="text"
                                                         placeholder="dd/mm/yyyy"
@@ -555,14 +555,6 @@ class Part1 extends Component {
                                     </Button>
                                 </Grid>
                             </Grid>
-                            <div>
-                                <Link to="/user/register/2">
-                                    <button>Save and Continue</button>
-                                </Link>
-                                <Link to='/user/dashboard' >
-                                    <button>Cancel</button>
-                                </Link>
-                            </div>
                         </section>
                     </div>
                 ) : (

@@ -8,6 +8,7 @@ const {
     REACT_APP_DOMAIN,
     REACT_APP_CLIENT_ID,
     CLIENT_SECRET,
+    REACT_APP_LOGOUT_REDIRECT,
 } = process.env;
 
 
@@ -70,6 +71,6 @@ module.exports = {
     logout: (req, res) => {
         // wipes the session for user
         req.session.destroy()
-        res.redirect('http://localhost:3000/')
+        res.redirect(REACT_APP_LOGOUT_REDIRECT)
     }
 }

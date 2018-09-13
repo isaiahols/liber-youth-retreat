@@ -5,7 +5,7 @@ import { updateUser } from '../../Ducks/registration'
 const Logout = (props) => {
     return (
         <div>
-            <a href='http://localhost:3035/auth/logout'>
+            <a href={process.env.REACT_APP_LOGOUT}>
                 <h3 onClick={() => props.updateUser({})}>Logout</h3>
             </a>
         </div>

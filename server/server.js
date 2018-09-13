@@ -30,10 +30,11 @@ stripe(STRIPE_SECRET);
 massive(CONNECTION_STRING).then(db => {
   app.set('db', db);
   console.log('Connected to Database');
-
+  
 })
 
 // // // Middleware // // //
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json());
 app.use(session({
   secret: SECRET,
