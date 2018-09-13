@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import reducer from './Ducks/registration';
-import thunk from "redux-thunk";
+// import thunk from "redux-thunk";
 import promise from 'redux-promise-middleware';
 // import { throttle } from 'lodash/throttle'
 
@@ -8,7 +8,7 @@ import promise from 'redux-promise-middleware';
 
 // const persistedState = loadState();
 
-const middleware = applyMiddleware(thunk, promise())
+const middleware = applyMiddleware( promise())
 
 const store = createStore(
     reducer,

@@ -2,6 +2,10 @@ import React from 'react'
 import { connect } from "react-redux";
 import { updateNestedObject } from "../../Ducks/registration";
 
+import { Card, CardHeader, CardMedia, CardContent, Typography, Grid } from '@material-ui/core';
+
+import './CampTiles.css';
+
 const CampTiles = (props) => {
     const { camp, updateNestedObject } = props;
 
@@ -10,12 +14,28 @@ const CampTiles = (props) => {
     }
 
     return (
-        <div className="tiles" id='c-tiles' onClick={() => handleSelect()} >
-            <h2>{camp.title}</h2>
-            <h3>{`From: ${camp.start_date} to ${camp.end_date}`}</h3>
-            <h3>{`Near: ${camp.location}`}</h3>
-            <h4>{camp.description}</h4>
-        </div>
+        <Grid item xs={12}>
+            <Card className="tiles"
+                id='c-tiles'
+                onClick={() => handleSelect()}
+            >
+                <CardHeader
+                    title={camp.title}
+                    subheader={`Starting ${camp.start_date}`}
+                />
+                <CardContent>
+                    <Typography variant='body2' >
+                        {camp.description}
+                    </Typography>
+                    <Typography variant='caption' >
+                        {`Near: ${camp.location}`}
+                    </Typography>
+                </CardContent>
+                {/* <CardMedia /> */}
+
+
+            </Card>
+        </Grid>
     )
 };
 

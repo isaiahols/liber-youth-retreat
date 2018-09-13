@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Parallax } from 'react-parallax';
 
-
 import { AccountCircle } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import {
@@ -44,11 +43,11 @@ class About extends Component {
     email: '',
   };
 
-
+  
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-  
+
   handleClose = () => {
     this.setState({ open: false });
     this.handleInfoRequest()
@@ -80,6 +79,8 @@ class About extends Component {
 
   render() {
     const { classes } = this.props;
+
+
     return (
       <div>
         <Paper id='about-top-image' >
@@ -90,7 +91,9 @@ class About extends Component {
           <div style={{ height: 500 }}>
           </div> */}
 
-          <div class="top-text-background">
+          <div 
+          className="top-text-background"
+          >
 
             <Typography variant='display3' className='top-text' >
               Learn About LYR
@@ -101,6 +104,9 @@ class About extends Component {
 
         {/* cards go here */}
         <Paper className='tile-outer' >
+          <Typography variant='display2' className='tile-title' >
+            Our Mission
+          </Typography>
           <Typography variant='display1' className='tile-title' >
             Becoming Principled Leaders through developing character, seeking education, and pursuing personal mission.
           </Typography>
@@ -138,7 +144,7 @@ class About extends Component {
             <Typography variant='caption' paragraph>
               “A man’s character is like his house. If he tears boards off his house and burns them to keep himself warm and comfortable, his house soon becomes a ruin. If he tells lies to be able to do the things he shouldn’t do but wants to, his character will soon become a ruin. A man with a ruined character is a shame on the face of the earth.”
             </Typography>
-            <Typography>
+            <Typography variant='caption'>
               ― Ralph Moody, Little Britches
             </Typography>
           </Paper>
@@ -285,6 +291,11 @@ class About extends Component {
 
         </Paper>
         {/* about the team */}
+        <Paper>
+          <Typography variant='display2'>
+            Meet the Team
+          </Typography>
+        </Paper>
         {/* Naomi Burton, Isaiah Olson (developer) */}
         {/* testimonials */}
       </div>

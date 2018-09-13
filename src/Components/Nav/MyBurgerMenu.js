@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     Paper,
-    Typography
+    Typography,
+    Avatar
 } from '@material-ui/core'
 
 import './MyBurgerMenu.css'
@@ -33,12 +37,21 @@ export default class NewBurger extends Component {
                         className="menu-holder"
                         onClick={() => this.handleMenuClick()}
                     >
-                        <FontAwesomeIcon
-                            icon='bars'
-                            size='3x'
-                            inverse
-                            fixedWidth
-                        />
+                        <Avatar
+                            style={{
+                                backgroundColor: '#A16E83',
+                                width: 90,
+                                height: 90,
+                            }}
+                        >
+
+                            <FontAwesomeIcon
+                                icon='bars'
+                                size='3x'
+                                inverse
+                                fixedWidth
+                            />
+                        </Avatar>
                     </div>
 
                 ) : (
@@ -58,27 +71,37 @@ export default class NewBurger extends Component {
                                 />
                             </div>
                             <Paper>
-                                <Typography variant='title'>
-                                    Home
+
+                                <Paper>
+                                    <Link to='/'>
+                                        <Typography variant='title'>
+                                            Home
                                  </Typography>
-                            </Paper>
-                            <Paper>
-                                <Typography variant='title'>
-                                    About
-                </Typography>
+                                    </Link>
+                                </Paper>
+                                <Paper>
+                                    <Link to='/about' >
+                                        <Typography variant='title'>
+                                            About
+                                    </Typography>
+                                    </Link>
+                                </Paper>
+                                <Paper>
+                                    <Link to='/contact' >
+                                        <Typography variant='title'>
+                                            Contact
+                                    </Typography>
+                                    </Link>
 
-                            </Paper>
-                            <Paper>
-                                <Typography variant='title'>
-                                    Contact
-                </Typography>
+                                </Paper>
+                                <Paper>
+                                    <Link to='/legal' >
+                                        <Typography variant='title'>
+                                            Legal
+                                    </Typography>
+                                    </Link>
 
-                            </Paper>
-                            <Paper>
-                                <Typography variant='title'>
-                                    Legal
-                </Typography>
-
+                                </Paper>
                             </Paper>
                         </div>
 

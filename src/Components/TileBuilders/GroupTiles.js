@@ -2,17 +2,34 @@ import React from 'react'
 import { connect } from "react-redux";
 import { updateNestedObject } from "../../Ducks/registration";
 
+import { Card, CardHeader, CardMedia, CardContent, Typography, Grid } from '@material-ui/core';
+
 const GroupTiles = (props) => {
     const { group, updateNestedObject } = props
     const handleSelect = () => {
         updateNestedObject({ where: 'attendee', what: 'camp_id', val: group.group_id })
     }
     return (
-        <div className="tiles" id='g-tiles' onClick={()=>handleSelect()} >
-            <h2>{group.title}</h2>
-            <h3>{`Suggested age: ${group.ages}`}</h3>
-            <h4>{group.description}</h4>
-        </div>
+        <Grid item xs={12}>
+            <Card 
+                className="tiles"
+                id='g-tiles'
+                onClick={() => handleSelect()}
+                style={{
+                    width: "80vw"
+                }}
+            >
+                <CardHeader
+                    title={group.title}
+                    subheader={`Suggested age: ${group.age}`}
+                />
+                <CardContent>
+                    <Typography variant='body2' >
+                        {group.description}
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Grid>
     )
 }
 
