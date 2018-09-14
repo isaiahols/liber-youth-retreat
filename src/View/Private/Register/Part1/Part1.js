@@ -6,6 +6,8 @@ import DatePicker from 'react-mobile-datepicker';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import Moment from 'react-moment';
+import moment from 'moment'
 
 
 import {
@@ -69,7 +71,6 @@ class Part1 extends Component {
 
         this.state = {
             time: new Date(),
-            // time: `${new Date().getFullYear()} ${new Date().getMonth()} ${new Date().getDate()}`,
             isOpen: false,
         }
     }
@@ -100,6 +101,9 @@ class Part1 extends Component {
     }
 
     handleSelect = (time) => {
+        if (time[0]) {
+            time = time[0]
+        }
         // let date = time.toString()substring(0, 11)
         this.setState({ time, isOpen: false });
         this.handleUpdate({ what: 'birthday', val: time })
@@ -124,23 +128,28 @@ class Part1 extends Component {
         this.handleUpdate(updateObj)
     }
 
+    handleSelfRegister = (event) => {
+        this.handleUpdate({ what: 'self_register', val: event.target.value }, 'attendee')
+    }
+
 
     render() {
+        const { time } = this.state;
         const {
             user,
             camper: {
                 first_name,
                 last_name,
-                birthday,
+                birthday = time,
                 email,
                 gender
             },
             usersParticipants,
             groups,
-            camps
+            camps,
+            attendee: { self_register },
         } = this.props
 
-        const { time } = this.state;
 
         const { classes } = this.props;
 
@@ -237,7 +246,7 @@ class Part1 extends Component {
 
                         ) : (
                                 <div>
-                                    <h1>No Saved Campers</h1>
+                                    {null}
                                 </div>
                             )}
                         <Paper
@@ -256,8 +265,22 @@ class Part1 extends Component {
                                 <Grid item sx={12}>
                                     <Typography variant='display1' >Are you registering</Typography>
                                 </Grid>
-                                <h3 onClick={() => { this.handleUpdate({ what: 'self_register', val: true }, 'attendee') }}>Yourself</h3>
-                                <h3 onClick={() => { this.handleUpdate({ what: 'self_register', val: false }, 'attendee') }}>Someone In Your Guardianship</h3>
+                                <FormControl
+                                    component="fieldset"
+                                    className={classes.formControl}
+                                >
+                                    {/* <FormLabel component="legend">Gender</FormLabel> */}
+                                    <RadioGroup
+                                        aria-label="Registering Agent"
+                                        name="RegAgent"
+                                        className={classes.group}
+                                        value={self_register}
+                                        onChange={this.handleSelfRegister}
+                                    >
+                                        <FormControlLabel value="true" control={<Radio />} label="Yourself" />
+                                        <FormControlLabel value="false" control={<Radio />} label="Someone In Your Guardianship" />
+                                    </RadioGroup>
+                                </FormControl>
                             </Grid>
                         </Paper>
                         <Paper
@@ -336,7 +359,7 @@ class Part1 extends Component {
                                         </Typography>
                                     </Grid>
 
-                                    <Grid item xs={8} sm={6}
+                                    <Grid item xs={8}
                                         style={{
                                             height: "80px",
                                         }}
@@ -348,25 +371,27 @@ class Part1 extends Component {
                                             justify="center"
                                             alignItems="flex-end"
                                         >
-                                            <FormControl
-                                                margin="normal"
-                                                fullWidth={true}
-                                            >
-                                                <InputLabel>First Name*</InputLabel>
-                                                <Input
-                                                    onChange={(e) => this.handleUpdate({
-                                                        what: 'first_name',
-                                                        val: e.target.value
-                                                    })}
-                                                    value={first_name}
-                                                    onClick={() => this.handleClickToEdit('first_name')
-                                                    }
-                                                    required={true}
-                                                />
-                                            </FormControl>
+                                            <Grid item xs={12} sm={6}>
+                                                <FormControl
+                                                    margin="normal"
+                                                    fullWidth={true}
+                                                >
+                                                    <InputLabel>First Name*</InputLabel>
+                                                    <Input
+                                                        onChange={(e) => this.handleUpdate({
+                                                            what: 'first_name',
+                                                            val: e.target.value
+                                                        })}
+                                                        value={first_name}
+                                                        onClick={() => this.handleClickToEdit('first_name')
+                                                        }
+                                                        required={true}
+                                                    />
+                                                </FormControl>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
-                                    <Grid item xs={8} sm={6}
+                                    <Grid item xs={8}
                                         style={{
                                             height: "80px",
                                         }}
@@ -378,32 +403,24 @@ class Part1 extends Component {
                                             justify="center"
                                             alignItems="flex-end"
                                         >
-
-                                            <FormControl
-                                                margin="normal"
-                                                fullWidth={true}
-                                            >
-                                                <InputLabel>Last Name*</InputLabel>
-                                                <Input
-                                                    onChange={(e) => this.handleUpdate({
-                                                        what: 'last_name',
-                                                        val: e.target.value
-                                                    })}
-                                                    value={last_name}
-                                                    onClick={() => this.handleClickToEdit('last_name')}
-                                                />
-                                            </FormControl>
+                                            <Grid item xs={12} sm={6}>
+                                                <FormControl
+                                                    margin="normal"
+                                                    fullWidth={true}
+                                                >
+                                                    <InputLabel>Last Name*</InputLabel>
+                                                    <Input
+                                                        onChange={(e) => this.handleUpdate({
+                                                            what: 'last_name',
+                                                            val: e.target.value
+                                                        })}
+                                                        value={last_name}
+                                                        onClick={() => this.handleClickToEdit('last_name')}
+                                                    />
+                                                </FormControl>
+                                            </Grid>
 
                                         </Grid>
-                                    </Grid>
-                                    <Grid item>
-
-                                        <Typography
-                                            variant='title'
-                                            align='center'
-                                        >
-                                            Campers Birthday
-                                    </Typography>
                                     </Grid>
                                     <MediaQuery maxWidth={768}>
                                         <DatePicker
@@ -420,9 +437,11 @@ class Part1 extends Component {
                                         />
                                     </MediaQuery>
                                     <MediaQuery minDeviceWidth={769} >
-                                        <Flatpickr data-enable-time
+                                        <Flatpickr
+                                            // data-enable-time
                                             value={time}
-                                            onChange={time => { this.setState({ time }) }}
+                                            // onChange={time => { this.setState({ time }) }}
+                                            onChange={this.handleSelect}
                                             style={{
                                                 altInput: true,
                                                 altFormat: "F j, Y",
@@ -430,9 +449,25 @@ class Part1 extends Component {
                                             }}
                                         />
                                     </MediaQuery>
+                                    <Grid
+                                        item
+                                        xs={8}
+                                        style={{
+                                            margin: " 25px 0 15px"
+                                        }}
+                                    >
+
+                                        <Typography
+                                            variant='title'
+                                            align='center'
+                                        >
+                                            Campers Birthday
+                                            </Typography>
+                                    </Grid>
                                     <Grid item xs={8} sm={6}
                                         style={{
                                             height: "80px",
+                                            margin: "15px 0 30px"
                                         }}
                                     >
                                         <Grid
@@ -442,6 +477,13 @@ class Part1 extends Component {
                                             justify="center"
                                             alignItems="flex-end"
                                         >
+                                            <Button
+                                                onClick={this.handleClick}
+                                                color='primary'
+                                                variant="contained"
+                                            >
+                                                Select Date
+                                            </Button>
                                             {birthday ? (
                                                 <FormControl
                                                     margin="normal"
@@ -455,10 +497,10 @@ class Part1 extends Component {
                                                             this.handleUpdate(
                                                                 {
                                                                     what: 'birthday',
-                                                                    val: e.target.value.replace('/', '')
+                                                                    val: e.target.value
                                                                 })
                                                         }}
-                                                        value={birthday}
+                                                        value={moment(birthday).format('DD MMMM YYYY')}
                                                         required={true}
                                                         style={{
                                                             altInput: true,
@@ -468,13 +510,7 @@ class Part1 extends Component {
                                                     />
                                                 </FormControl>
                                             ) : (
-                                                    <Button
-                                                        onClick={this.handleClick}
-                                                        color='primary'
-                                                        variant="contained"
-                                                    >
-                                                        Select Date
-                                        </Button>
+                                                    <div>{null}</div>
                                                 )}
                                         </Grid>
                                     </Grid>
@@ -530,31 +566,45 @@ class Part1 extends Component {
                                     </FormControl>
                                 </Grid>
                             </Paper>
-                            <Grid item xs={8} sm={6}
+                            {/* <Grid item xs={12}
                                 style={{
                                     height: "80px",
                                 }}
-                            >
+                            > */}
                                 <Grid
                                     container
                                     spacing={8}
                                     direction="row"
                                     justify="center"
+                                    style={{
+                                        padding: 10
+                                    }}
+                                    alignContent= 'space-around'
                                 >
-                                    <Button
-                                        component={Link}
-                                        to="/user/dashboard"
-                                    >
-                                        Cancel
-                                            </Button>
-                                    <Button
-                                        component={Link}
-                                        to="/user/register/2"
-                                    >
-                                        Save and Continue
-                                    </Button>
+                                    <Grid item>
+                                        <Button
+                                            component={Link}
+                                            to="/user/dashboard"
+                                            color='primary'
+                                            variant="contained"
+                                            fullWidth
+                                        >
+                                            Cancel
+                                        </Button>
+                                    </Grid>
+                                    <Grid item >
+                                        <Button
+                                            component={Link}
+                                            to="/user/register/2"
+                                            color='primary'
+                                            variant="contained"
+                                            fullWidth
+                                        >
+                                            Save and Continue
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
+                            {/* </Grid> */}
                         </section>
                     </div>
                 ) : (
@@ -571,7 +621,8 @@ function mapStateToProps(state) {
         user,
         usersParticipants,
         camps,
-        groups
+        groups,
+        attendee
     } = state;
 
     return {
@@ -579,7 +630,8 @@ function mapStateToProps(state) {
         user,
         usersParticipants,
         camps,
-        groups
+        groups,
+        attendee
     }
 }
 

@@ -105,8 +105,8 @@ export default class NewBurger extends Component {
 
                                 </Paper>
                                 <Paper>
-                                    <Link to='/login' >
-                                    <Login/>
+                                    <Link to='/' >
+                                        <Login />
                                         <Typography variant='title'>
                                             Login
                                     </Typography>
@@ -114,12 +114,10 @@ export default class NewBurger extends Component {
 
                                 </Paper>
                                 <Paper>
-                                    <Link to='/logout' >
-                                    <Logout/>
-                                        <Typography variant='title'>
-                                            Logout
+                                    <Logout />
+                                    <Typography variant='title'>
+                                        Logout
                                     </Typography>
-                                    </Link>
 
                                 </Paper>
                             </Paper>

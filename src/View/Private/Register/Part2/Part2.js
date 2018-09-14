@@ -15,7 +15,16 @@ import {
     FormControl,
     FormLabel,
     withStyles,
-    IconButton
+    IconButton,
+    Select,
+    MenuItem,
+    FormHelperText,
+    Grid,
+    Button,
+    Paper,
+    Typography,
+    TextField,
+    Input
 } from '@material-ui/core';
 
 // import { PhotoCamera } from '@material-ui/icons'
@@ -46,7 +55,23 @@ const styles = theme => ({
     input: {
         display: 'none',
     },
-});
+    selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: "80%",
+    },
+    input: {
+        margin: theme.spacing.unit,
+        width: "80%",
+    },
+})
 
 class Part2 extends Component {
     constructor() {
@@ -72,13 +97,6 @@ class Part2 extends Component {
                 })
         }
     }
-
-    // handleChange = event => {
-
-    //     this.setState({ size: event.target.value });
-    // };
-
-
 
 
     // // // PHOTO UPLOADING // // //
@@ -138,17 +156,19 @@ class Part2 extends Component {
 
 
     // // // UPDATE REDUX // // //
-    handleUpdate(updateObj) {
-        let newUpdateObj = { ...updateObj, where: 'participant', }
-        this.props.updateNestedObject(newUpdateObj);
+    handleUpdate = (updateObj) => {
+        if (updateObj.val.length < 1000 || typeof updateObj.val !== 'string') {
+            let newUpdateObj = { ...updateObj, where: 'participant', }
+            this.props.updateNestedObject(newUpdateObj);
+        }
     }
 
     handleSize = event => {
         this.handleUpdate({ what: 'size', val: event.target.value })
     }
 
-    handleOrderBooks(answer) {
-        this.handleUpdate({ what: 'order_books', val: answer })
+    handleOrderBooks = event => {
+        this.handleUpdate({ what: 'order_books', val: event.target.value })
     }
 
     render() {
@@ -160,7 +180,8 @@ class Part2 extends Component {
                 medical_concerns,
                 comments,
                 photo,
-                size
+                size,
+                order_books
             },
             classes
         } = this.props
@@ -170,144 +191,235 @@ class Part2 extends Component {
                 {user.user_id ? (
 
                     <div>
-                        <section className="top">
+                        <Paper className="top">
                             <h1>More Details</h1>
-                        </section>
-                        <section>
-                            <h2>A Few More Things</h2>
-                            <h3>Upload a Photo</h3>
-                            <div className="photoUploader">
-                                {/* This is where React S3 Uploader */}
-                                <div className="dropzone">
-                                    {/* <Dropzone onDrop={this.onDrop.bind(this)}>
+                        </Paper>
+                        <Grid
+                            container
+                            spacing={8}
+                            direction='column'
+                            justify="center"
+                            alignItems='center'
+                            alignContent='center'
+                        >
+
+                            <Grid item xs={12}>
+                                <Paper>
+
+                                    <h2>A Few More Things</h2>
+                                    <h3>Upload a Photo</h3>
+                                    <div className="photoUploader">
+                                        {/* This is where React S3 Uploader */}
+                                        <div className="dropzone">
+                                            {/* <Dropzone onDrop={this.onDrop.bind(this)}>
                                             <p>Try dropping some files here, or click to select files to upload.</p>
                                         </Dropzone> */}
-                                    <Dropzone
-                                        onDropAccepted={this.getSignedRequest}
-                                        style={{
-                                            position: 'relative',
-                                            width: 200,
-                                            height: 200,
-                                            borderWidth: 7,
-                                            marginTop: 100,
-                                            borderColor: 'rgb(102, 102, 102)',
-                                            borderStyle: 'dashed',
-                                            borderRadius: 5,
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            fontSize: 28,
-                                        }}
-                                        accept='image/*'
-                                        multiple={false} >
+                                            <Dropzone
+                                                onDropAccepted={this.getSignedRequest}
+                                                style={{
+                                                    position: 'relative',
+                                                    width: 200,
+                                                    height: 200,
+                                                    borderWidth: 7,
+                                                    marginTop: 100,
+                                                    borderColor: 'rgb(102, 102, 102)',
+                                                    borderStyle: 'dashed',
+                                                    borderRadius: 5,
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    fontSize: 28,
+                                                }}
+                                                accept='image/*'
+                                                multiple={false} >
 
-                                        {this.state.isUploading
-                                            ? <PacmanLoader />
-                                            : (
+                                                {this.state.isUploading
+                                                    ? <PacmanLoader />
+                                                    // : (
+                                                    //     <IconButton color="primary" className={classes.button} component="span">
+                                                    //         <PhotoCamera />
+                                                    //     </IconButton>
+                                                    // )
+                                                    : <p>Drop File or Click Here</p>
+                                                }
+                                            </Dropzone>
 
-                                                <IconButton color="primary" className={classes.button} component="span">
-                                                    <PhotoCamera />
-                                                </IconButton>
-                                            )
-                                            // : <p>Drop File or Click Here</p>
-                                        }
-
-                                    </Dropzone>
-                                    <input
+                                            {/* <input
                                         accept="image/*"
                                         className={classes.input}
                                         id="icon-button-file"
                                         type="file"
                                         onChange={(e) => this.getSignedRequest([e.target.value])}
-                                    />
-                                    <label htmlFor="icon-button-file">
+                                        />
+                                        <label htmlFor="icon-button-file">
                                         <IconButton color="primary" className={classes.button} component="span">
-                                            <PhotoCamera />
+                                        <PhotoCamera />
                                         </IconButton>
-                                    </label>
-                                </div>
-                                <img src={photo} className='confirm-photo' />
-                            </div>
+                                    </label> */}
+                                        </div>
+                                        <img src={photo} className='confirm-photo' />
+                                    </div>
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper className={classes.root}>
+                                    <FormControl className={classes.formControl}>
+                                        <Select
+                                            aria-label="T-Shirt Size"
+                                            name="t-shirt size"
+                                            displayEmpty
+                                            className={classes.selectEmpty}
+                                            value={size}
+                                            onChange={this.handleSize}
+                                        >
+                                            <MenuItem value="" disabled>
+                                                T-Shirt Size
+                                        </MenuItem>
+                                            <MenuItem value="xl">Extra Large</MenuItem>
+                                            <MenuItem value="l">Large</MenuItem>
+                                            <MenuItem value="m">Medium</MenuItem>
+                                            <MenuItem value='s'>Small</MenuItem>
+                                            <MenuItem value='xs'>Extra Small</MenuItem>
+                                        </Select>
+                                        <FormHelperText>T-Shirt Size</FormHelperText>
+                                    </FormControl>
 
-                            <div className={classes.root}>
-                                <FormControl component="fieldset" className={classes.formControl} >
-                                    <FormLabel component="legend">T-Shirt Size</FormLabel>
-                                    <RadioGroup
-                                        aria-label="T-Shirt Size"
-                                        name="t-shirt size"
-                                        className={classes.group}
-                                        value={size}
-                                        onChange={this.handleSize}
-                                    >
-                                        <FormControlLabel value="XL" control={<Radio />} label="Extra Large" />
-                                        <FormControlLabel value="L" control={<Radio />} label="Large" />
-                                        <FormControlLabel value="M" control={<Radio />} label="Medium" />
-                                        <FormControlLabel value="S" control={<Radio />} label="Small" />
-                                        <FormControlLabel value="XS" control={<Radio />} label="Extra Small" />
-                                    </RadioGroup>
-                                </FormControl>
-                                
-                            </div>
-                            <div>
-                                <h2>Order Books Now</h2>
-                                {/* Both have an onClick */}
-                                <h3 onClick={() => this.handleOrderBooks(true)} >Yes!</h3>
-                                <h3 onClick={() => this.handleOrderBooks(false)} >No, not right now</h3>
-                            </div>
-                        </section>
-                        <section>
-                            <div>
-                                <h2>Please List ALL Dietary Concerns</h2>
-                                <textarea
-                                    name="Dietary Concerns"
-                                    id="" cols="30"
-                                    rows="5"
+                                </Paper>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper>
+                                    <FormControl className={classes.formControl}>
+                                        <Select
+                                            aria-label="Order Books Now"
+                                            name="Order Books Now"
+                                            displayEmpty
+                                            className={classes.selectEmpty}
+                                            value={order_books}
+                                            onChange={this.handleOrderBooks}
+                                        >
+                                            <MenuItem value="" disabled>
+                                                Order Books Now
+                                        </MenuItem>
+                                            <MenuItem value={true}>Yes!</MenuItem>
+                                            <MenuItem value={false}>No, not right now</MenuItem>
+                                        </Select>
+                                        <FormHelperText>Order Books Now</FormHelperText>
+                                    </FormControl>
+                                </Paper>
+                            </Grid>
+                            <Paper>
+                                <Typography variant='display2'>Dietary</Typography>
+                                {/* <Typography variant='headline' >Please List ALL Dietary Concerns</Typography> */}
+                                <TextField
+                                    id="multiline-flexible"
+                                    label="Please List ALL Dietary Concerns"
+                                    multiline
+                                    rowsMax="4"
                                     onChange={(e) => this.handleUpdate({ what: 'dietary_concerns', val: e.target.value })}
                                     value={dietary_concerns}
-                                ></textarea>
-                            </div>
-                            <div>
-                                <h2>Please List ALL Medical Concerns</h2>
-                                <textarea
-                                    name="Medical Concerns"
-                                    type="text"
-                                    ols="30"
-                                    rows="6"
-                                    onChange={(e) => this.handleUpdate({ what: 'medical_concerns', val: e.target.value })}
+                                    className={classes.textField}
+                                    margin="normal"
+                                />
+                            </Paper>
+                            <Paper>
+                                <Typography
+                                    variant='display2'
+                                    style={{
+                                        alignContent: 'center'
+                                    }}
+                                >Medical</Typography>
+                                {/* <Typography variant='headline' >Please List ALL Medical Concerns</Typography> */}
+                                <TextField
+                                    id="multiline-flexible"
+                                    label="Please List ALL Medical Concerns"
+                                    multiline
+                                    rowsMax="4"
                                     value={medical_concerns}
-                                ></textarea>
-                            </div>
-                            <div>
-                                <h2>Health Care Number</h2>
+                                    onChange={(e) => this.handleUpdate({ what: 'medical_concerns', val: e.target.value })}
+                                    className={classes.textField}
+                                    margin="normal"
+                                />
+                                <Typography variant='headline' >Health Care Number</Typography>
+                                <Input
+                                    placeholder="Health Care Number"
+                                    className={classes.input}
+                                    inputProps={{
+                                        'aria-label': 'Description',
+                                    }}
+                                    onChange={(e) => this.handleUpdate({ what: 'health_card_num', val: e.target.value })}
+                                    value={health_card_num}
+                                />
                                 <input
                                     type="text"
                                     onChange={(e) => this.handleUpdate({ what: 'health_card_num', val: e.target.value })}
                                     value={health_card_num}
                                 />
-                            </div>
-                        </section>
-                        <div>
-                            <h2>Anything else you want to tell us?</h2>
-                            <textarea
-                                name="Comments"
-                                id=""
-                                cols="30"
-                                rows="10"
-                                onChange={(e) => this.handleUpdate({ what: 'comments', val: e.target.value })}
-                                value={comments}
-                            ></textarea>
-                        </div>
-                        <div>
-                            <Link to="/user/register/3">
-                                <button>Save and Continue</button>
-                            </Link>
-                            <Link to='/user/register/1' >
-                                <button>Previous</button>
-                            </Link>
-                            <Link to='/user/dashboard' >
-                                <button>Cancel</button>
-                            </Link>
-                        </div>
+                            </Paper>
+                            <Paper>
+                                <Typography variant='display2' >Comments</Typography>
+                                <TextField
+                                    id="multiline-flexible"
+                                    label="Anything else you want to tell us?"
+                                    multiline
+                                    rowsMax="4"
+                                    value={comments}
+                                    onChange={(e) => this.handleUpdate({ what: 'comments', val: e.target.value })}
+                                    className={classes.textField}
+                                    margin="normal"
+                                />
+                            </Paper>
+                        </Grid>
+                        <Paper>
+                            {/* <Grid item xs={12}
+                                style={{
+                                    height: "80px",
+                                }}
+                            > */}
+                            <Grid
+                                container
+                                spacing={8}
+                                direction="row"
+                                justify="center"
+                                style={{
+                                    padding: 10
+                                }}
+                                alignContent='space-around'
+                            >
+                                <Grid item>
+                                    <Button
+                                        component={Link}
+                                        to="/user/dashboard"
+                                        color='primary'
+                                        variant="contained"
+                                        fullWidth
+                                    >
+                                        Cancel
+                                        </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        component={Link}
+                                        to="/user/register/1"
+                                        color='primary'
+                                        variant="contained"
+                                        fullWidth
+                                    >
+                                        Previous
+                                        </Button>
+                                </Grid>
+                                <Grid item >
+                                    <Button
+                                        component={Link}
+                                        to="/user/register/3"
+                                        color='primary'
+                                        variant="contained"
+                                        fullWidth
+                                    >
+                                        Save and Continue
+                                        </Button>
+                                </Grid>
+                            </Grid>
+                        </Paper>
                     </div>
                 ) : (
                         <div>
