@@ -9,6 +9,7 @@ import Nav from './Components/Nav/Nav';
 import MyBurger from './Components/Nav/MyBurgerMenu';
 import Burger from './Components/Nav/BurgerMenu';
 import Footer from './Components/Footer/Footer';
+import Loader from './Components/Loader/Loader';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -37,26 +38,42 @@ const theme = createMuiTheme({
 
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      loading: false
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(
+      function () {
+        this.setState({
+          loading: true
+        });
+      }.bind(this),
+      2000
+    );
+  }
+
   render() {
     return (
       <HashRouter>
         <MuiThemeProvider theme={theme}>
           <div className="App">
-            <CssBaseline />
-            {/* <Nav /> */}
-            <MyBurger />
-            <div id="outer-container">
-              {/* <Burger
-                id='burger-place'
-                pageWrapId={"page-wrap"}
-                outerContainerId={"outer-container"}
-              // noOverlay={false}
-              /> */}
-              {/* <main id="page-wrap">
-              </main> */}
-            </div>
-            {routes}
-            <Footer />
+            {this.state.loading === false ? (
+              <Loader />
+            ) : (
+                <div>
+                  < CssBaseline />
+                  <MyBurger />
+                  {/* <div id="outer-container">
+                    </div> */}
+                  {routes}
+                  <Footer />
+                </div>
+              )}
           </div>
         </MuiThemeProvider>
       </HashRouter>
