@@ -1,0 +1,14 @@
+.thanks-page-container {
+    background-image: url('../../../assests//images/negative-space-blue-sky-farm-field-summer-tookapic.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    background-position: center; 
+    min-height: 100vh;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}

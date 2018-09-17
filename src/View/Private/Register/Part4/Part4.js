@@ -108,7 +108,7 @@ class Part4 extends Component {
                         }}
                     >Emergency Contact</Typography>
                 </Paper>
-                {first_name ? (
+                {usersEmergency[0] ? (
                     <Paper
                         style={{
                             padding: 15,
@@ -131,8 +131,8 @@ class Part4 extends Component {
                                     }}
                                 >Select a Saved Emergency Contact</Typography>
                                 {/* use guardian tile builder here */}
-                                {mappedEmergency}
                             </Grid>
+                            {mappedEmergency}
                         </Grid>
                         {/* highlight the each selected Emergency Contact  */}
                         {/* use guardian tile builder here */}

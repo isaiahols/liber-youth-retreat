@@ -161,7 +161,7 @@ class Part3 extends Component {
                                 </Grid>
                             </Grid>
                         </Paper>
-                        {first_name ? (
+                        {usersGuardians[0] ? (
                             <Paper
                                 style={{
                                     padding: 15,
@@ -184,8 +184,8 @@ class Part3 extends Component {
                                             }}
                                         >Select a Saved Guardian</Typography>
                                         {/* use guardian tile builder here */}
-                                        {mappedGuardians}
                                     </Grid>
+                                        {mappedGuardians}
                                 </Grid>
                             </Paper>
                         ) : (
