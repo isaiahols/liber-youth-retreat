@@ -30,6 +30,8 @@ import {
 // import { PhotoCamera } from '@material-ui/icons'
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
+import PhotoUploader from '../../../../Components/PhotoUploader/PhotoUploader'
+
 
 
 import {
@@ -45,6 +47,7 @@ const styles = theme => ({
     },
     formControl: {
         margin: theme.spacing.unit * 3,
+        // marginBottom: theme.spacing.unit * 4,
     },
     group: {
         margin: `${theme.spacing.unit}px 0`,
@@ -71,6 +74,9 @@ const styles = theme => ({
         margin: theme.spacing.unit,
         width: "80%",
     },
+    topText: {
+        minHeight: '200px'
+    }
 })
 
 class Part2 extends Component {
@@ -191,79 +197,86 @@ class Part2 extends Component {
                 {user.user_id ? (
 
                     <div>
-                        <Paper className="top">
-                            <h1>More Details</h1>
-                        </Paper>
-                        <Grid
-                            container
-                            spacing={8}
-                            direction='column'
-                            justify="center"
-                            alignItems='center'
-                            alignContent='center'
-                        >
 
-                            <Grid item xs={12}>
-                                <Paper>
-
-                                    <h2>A Few More Things</h2>
-                                    <h3>Upload a Photo</h3>
-                                    <div className="photoUploader">
-                                        {/* This is where React S3 Uploader */}
-                                        <div className="dropzone">
-                                            {/* <Dropzone onDrop={this.onDrop.bind(this)}>
-                                            <p>Try dropping some files here, or click to select files to upload.</p>
-                                        </Dropzone> */}
-                                            <Dropzone
-                                                onDropAccepted={this.getSignedRequest}
-                                                style={{
-                                                    position: 'relative',
-                                                    width: 200,
-                                                    height: 200,
-                                                    borderWidth: 7,
-                                                    marginTop: 100,
-                                                    borderColor: 'rgb(102, 102, 102)',
-                                                    borderStyle: 'dashed',
-                                                    borderRadius: 5,
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                    fontSize: 28,
-                                                }}
-                                                accept='image/*'
-                                                multiple={false} >
-
-                                                {this.state.isUploading
-                                                    ? <PacmanLoader />
-                                                    // : (
-                                                    //     <IconButton color="primary" className={classes.button} component="span">
-                                                    //         <PhotoCamera />
-                                                    //     </IconButton>
-                                                    // )
-                                                    : <p>Drop File or Click Here</p>
-                                                }
-                                            </Dropzone>
-
-                                            {/* <input
-                                        accept="image/*"
-                                        className={classes.input}
-                                        id="icon-button-file"
-                                        type="file"
-                                        onChange={(e) => this.getSignedRequest([e.target.value])}
-                                        />
-                                        <label htmlFor="icon-button-file">
-                                        <IconButton color="primary" className={classes.button} component="span">
-                                        <PhotoCamera />
-                                        </IconButton>
-                                    </label> */}
-                                        </div>
-                                        <img src={photo} className='confirm-photo' />
-                                    </div>
-                                </Paper>
+                        <Paper
+                            className={classes.topText}
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}>
+                            <Grid
+                                container
+                                spacing={8}
+                                direction='column'
+                                justify="center"
+                                alignItems='center'
+                            // alignContent='center'
+                            >
+                                <Grid item xs={12}>
+                                    <Typography
+                                        variant='display3'
+                                        align='center'
+                                        style={{
+                                            margin: '60px 0'
+                                        }}
+                                    >
+                                        More Details
+                            </Typography>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <Paper className={classes.root}>
-                                    <FormControl className={classes.formControl}>
+                        </Paper>
+
+                        <Paper
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}
+                        >
+                            <Grid
+                                container
+                                spacing={8}
+                                direction='column'
+                                justify="center"
+                                alignItems='center'
+                            >
+                                <Grid item xs={12}>
+
+                                    <Typography variant='display2'>A Few More Things</Typography>
+                                </Grid>
+                                <Typography variant='headline'>Upload a Photo</Typography>
+                                <Grid item xs={12}>
+                                    <PhotoUploader
+                                        getSignedRequest={this.getSignedRequest}
+                                        isUploading={this.state.isUploading}
+                                        photo={photo}
+                                    />
+                                </Grid>
+
+                            </Grid>
+                        </Paper>
+                        <Paper
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}
+                        >
+                            <Grid
+                                container
+                                spacing={8}
+                                direction='column'
+                                justify="space-around"
+                                alignItems='center'
+                            >
+                                <Typography variant='display2'>Extra Stuff</Typography>
+                                <Grid item xs={12}>
+                                    <Typography variant='headline'>Select T-Shirt Size</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <FormControl className={classes.formControl}
+                                        style={{
+                                            marginBottom: '30px'
+                                        }}
+                                    >
                                         <Select
                                             aria-label="T-Shirt Size"
                                             name="t-shirt size"
@@ -284,11 +297,17 @@ class Part2 extends Component {
                                         <FormHelperText>T-Shirt Size</FormHelperText>
                                     </FormControl>
 
-                                </Paper>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Paper>
-                                    <FormControl className={classes.formControl}>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant='headline'>Order Books with Registration?</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <FormControl
+                                        className={classes.formControl}
+                                        style={{
+                                            marginBottom: '30px'
+                                        }}
+                                    >
                                         <Select
                                             aria-label="Order Books Now"
                                             name="Order Books Now"
@@ -305,10 +324,37 @@ class Part2 extends Component {
                                         </Select>
                                         <FormHelperText>Order Books Now</FormHelperText>
                                     </FormControl>
-                                </Paper>
+                                </Grid>
                             </Grid>
-                            <Paper>
-                                <Typography variant='display2'>Dietary</Typography>
+                        </Paper>
+                        <Paper
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}
+                        >
+                            <Grid
+                                container
+                                spacing={8}
+                                direction='column'
+                                justify="space-around"
+                                alignItems='center'
+                            >
+                                <Grid item xs={12}
+                                >
+                                    <Typography
+                                        variant='display2'
+                                        align='center'
+                                        style={{
+                                            margin: '60px 0'
+                                        }}
+                                    >Dietary</Typography>
+                                </Grid>
+                                {/* <Grid item xs={12}
+                                    style={{
+                                        height: "80px",
+                                    }}
+                                > */}
                                 {/* <Typography variant='headline' >Please List ALL Dietary Concerns</Typography> */}
                                 <TextField
                                     id="multiline-flexible"
@@ -320,14 +366,37 @@ class Part2 extends Component {
                                     className={classes.textField}
                                     margin="normal"
                                 />
-                            </Paper>
-                            <Paper>
-                                <Typography
-                                    variant='display2'
+                                {/* </Grid> */}
+                            </Grid>
+                        </Paper>
+                        <Paper
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}
+                        >
+                            <Grid
+                                container
+                                spacing={8}
+                                direction='column'
+                                justify="space-around"
+                                alignItems='center'
+                            >
+                                <Grid item xs={12}
+                                >
+                                    <Typography
+                                        variant='display2'
+                                        align='center'
+                                        style={{
+                                            margin: '60px 0'
+                                        }}
+                                    >Medical</Typography>
+                                </Grid>
+                                {/* <Grid item xs={12}
                                     style={{
-                                        alignContent: 'center'
+                                        height: "80px",
                                     }}
-                                >Medical</Typography>
+                                > */}
                                 {/* <Typography variant='headline' >Please List ALL Medical Concerns</Typography> */}
                                 <TextField
                                     id="multiline-flexible"
@@ -338,8 +407,19 @@ class Part2 extends Component {
                                     onChange={(e) => this.handleUpdate({ what: 'medical_concerns', val: e.target.value })}
                                     className={classes.textField}
                                     margin="normal"
+                                    style={{
+                                        marginBottom: '35px',
+                                    }}
                                 />
-                                <Typography variant='headline' >Health Care Number</Typography>
+                                {/* </Grid> */}
+                                <Grid item xs={12} >
+                                    <Typography variant='body1' >Health Care Number</Typography>
+                                </Grid>
+                                {/* <Grid item xs={12}
+                                    style={{
+                                        height: "80px",
+                                    }}
+                                > */}
                                 <Input
                                     placeholder="Health Care Number"
                                     className={classes.input}
@@ -349,14 +429,37 @@ class Part2 extends Component {
                                     onChange={(e) => this.handleUpdate({ what: 'health_card_num', val: e.target.value })}
                                     value={health_card_num}
                                 />
-                                <input
+                                {/* </Grid> */}
+                                {/* <input
                                     type="text"
                                     onChange={(e) => this.handleUpdate({ what: 'health_card_num', val: e.target.value })}
                                     value={health_card_num}
-                                />
-                            </Paper>
-                            <Paper>
-                                <Typography variant='display2' >Comments</Typography>
+                                /> */}
+                            </Grid>
+                        </Paper>
+                        <Paper
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}
+                        >
+                            <Grid
+                                container
+                                spacing={8}
+                                direction='column'
+                                justify="space-around"
+                                alignItems='center'
+                            >
+                                <Grid item xs={12}
+                                >
+                                    <Typography
+                                        variant='display2'
+                                        align='center'
+                                        style={{
+                                            margin: '60px 0'
+                                        }}
+                                    >Comments</Typography>
+                                </Grid>
                                 <TextField
                                     id="multiline-flexible"
                                     label="Anything else you want to tell us?"
@@ -366,10 +469,17 @@ class Part2 extends Component {
                                     onChange={(e) => this.handleUpdate({ what: 'comments', val: e.target.value })}
                                     className={classes.textField}
                                     margin="normal"
+                                    style={{
+                                        marginBottom: '35px',
+                                    }}
                                 />
-                            </Paper>
-                        </Grid>
-                        <Paper>
+                            </Grid>
+                        </Paper>
+                        <Paper
+                            style={{
+                                margin: '15px 0 0 '
+                            }}
+                        >
                             {/* <Grid item xs={12}
                                 style={{
                                     height: "80px",
@@ -447,3 +557,60 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Part2))
+
+
+
+            /// leftovers and Extras ///
+
+//     < div className="photoUploader" >
+//         {/* This is where React S3 Uploader */ }
+//         < div className = "dropzone" >
+//             {/* <Dropzone onDrop={this.onDrop.bind(this)}>
+//                                             <p>Try dropping some files here, or click to select files to upload.</p>
+//                                         </Dropzone> */}
+//             < Dropzone
+// onDropAccepted = { this.getSignedRequest }
+// style = {{
+//     position: 'relative',
+//         width: 200,
+//             height: 200,
+//                 borderWidth: 7,
+//                     marginTop: 100,
+//                         borderColor: 'rgb(102, 102, 102)',
+//                             borderStyle: 'dashed',
+//                                 borderRadius: 5,
+//                                     display: 'flex',
+//                                         justifyContent: 'center',
+//                                             alignItems: 'center',
+//                                                 fontSize: 28,
+//                                                 }}
+// accept = 'image/*'
+// multiple = { false} >
+
+//     {
+//         this.state.isUploading
+//             ? <PacmanLoader />
+//             // : (
+//             //     <IconButton color="primary" className={classes.button} component="span">
+//             //         <PhotoCamera />
+//             //     </IconButton>
+//             // )
+//             : <p>Drop File or Click Here</p>
+//     }
+//                                             </Dropzone >
+
+//     {/* <input
+//                                         accept="image/*"
+//                                         className={classes.input}
+//                                         id="icon-button-file"
+//                                         type="file"
+//                                         onChange={(e) => this.getSignedRequest([e.target.value])}
+//                                         />
+//                                         <label htmlFor="icon-button-file">
+//                                         <IconButton color="primary" className={classes.button} component="span">
+//                                         <PhotoCamera />
+//                                         </IconButton>
+//                                     </label> */}
+//                                         </div >
+//     <img src={photo} className='confirm-photo' />
+//                                     </div >

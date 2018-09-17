@@ -4,9 +4,14 @@ import { updateUser } from '../../Ducks/registration'
 
 const Logout = (props) => {
     return (
-        <div>
-            <a href={process.env.REACT_APP_LOGOUT}>
-                <h3 onClick={() => props.updateUser({})}>Logout</h3>
+        <div className='logout-container'>
+            <a
+                href={process.env.REACT_APP_LOGOUT}
+                className='logout-container'>
+                <h3
+                    onClick={() => props.updateUser({})}
+                    className='logout-container'
+                >Logout</h3>
             </a>
         </div>
     )

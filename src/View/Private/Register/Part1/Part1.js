@@ -347,7 +347,7 @@ class Part1 extends Component {
                                     justify="center"
                                 // alignItems="flex-end"
                                 >
-                                    <Grid item item xs={12}>
+                                    <Grid item xs={12}>
                                         <Typography
                                             variant='display2'
                                             align='center'

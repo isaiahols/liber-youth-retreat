@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
+import PropTypes from 'prop-types';
 
 import {
   updateUser,
@@ -15,7 +16,37 @@ import {
 import initialState from '../../../Ducks/initialState';
 import UsersAttendeeTiles from '../../../Components/TileBuilders/UsersAttendeeTiles';
 
+import RegisteredTiles from '../../../Components/TileBuilders/RegisteredTiles/RegisteredTiles';
+
 import './Dashboard.css'
+
+import {
+  Grid,
+  Typography,
+  Paper
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+  tiles: {
+    maxWidth: 600,
+    marginTop: theme.spacing.unit,
+  },
+  root: {
+    display: 'flex',
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`,
+  },
+  participants: {
+    margin: `${theme.spacing.unit}px 0`,
+    // background: theme.
+  },
+})
 
 
 class Dashboard extends Component {
@@ -47,10 +78,17 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user, usersAttendees } = this.props
+    const { user, usersAttendees, classes } = this.props
 
-    const mappedAttendees = usersAttendees.map(each => {
-      return <UsersAttendeeTiles key={each.attendee_id} each={each} />
+    // const mappedAttendees = usersAttendees.map(each => {
+    //   return <UsersAttendeeTiles key={each.attendee_id} each={each} />
+    // })
+    const mappedAttendees = usersAttendees.map(one => {
+      return (<RegisteredTiles
+        className='tiles'
+        key={`p${one.participant_id}`}
+        participant={one}
+      />)
     })
 
     return (
@@ -66,8 +104,30 @@ class Dashboard extends Component {
             </section>
             {}
             <section>
-              <h2>Your Current Registration</h2>
-              {mappedAttendees}
+              <Paper>
+                <Grid
+                  container
+                  spacing={24}
+                  direction='column'
+                  justify="center"
+                  alignItems='center'
+                  className={classes.participants}
+                >
+                  <Grid item xs={12} >
+                    <Typography
+                      variant='display2'
+                      align='center'
+                      style={{
+                        margin: '60px 0'
+                      }}
+                    >
+                      Your Current Registration
+                    </Typography>
+                  </Grid>
+
+                  {mappedAttendees}
+                </Grid>
+              </Paper>
             </section>
           </div>
           // get camps and select
@@ -99,5 +159,9 @@ const mapDispatchToProps = {
   updateObjectOnState
 }
 
+Dashboard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Dashboard));

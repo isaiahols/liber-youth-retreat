@@ -10,6 +10,7 @@ import MyBurger from './Components/Nav/MyBurgerMenu';
 import Burger from './Components/Nav/BurgerMenu';
 import Footer from './Components/Footer/Footer';
 import Loader from './Components/Loader/Loader';
+import MaterialNav from './Components/Nav/MaterialNav';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -53,7 +54,7 @@ class App extends Component {
           loading: true
         });
       }.bind(this),
-      2000
+      2500
     );
   }
 
@@ -67,11 +68,12 @@ class App extends Component {
             ) : (
                 <div>
                   < CssBaseline />
-                  <MyBurger />
+                  {/* <MyBurger /> */}
+                  <MaterialNav />
                   {/* <div id="outer-container">
                     </div> */}
                   {routes}
-                  <Footer />
+                  {/* <Footer /> */}
                 </div>
               )}
           </div>

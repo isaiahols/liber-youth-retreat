@@ -6,3 +6,8 @@
     align-items: center;
     justify-content: center
 }
+
+.loader {
+    height: 150px;
+    width: 150px;
+}

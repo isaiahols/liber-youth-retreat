@@ -1,15 +1,15 @@
 import React from 'react'
-import { updateObjectOnState } from "../../Ducks/registration";
+import { updateObjectOnState } from "../../../Ducks/registration";
 import { connect } from 'react-redux';
 
 import { Card, CardHeader, CardMedia, CardContent, Typography, Grid, Avatar, CardActionArea } from '@material-ui/core';
 import moment from 'moment'
 
+import '../ParticipantTiles.css';
 
-import './ParticipantTiles.css';
 
 const ParticipantTiles = (props) => {
-    const { first_name, last_name, birthday, email, photo } = props.participant
+    const { first_name, last_name, birthday, email, photo, group_id, start_date, title } = props.participant
 
     let handleSelect = () => {
         props.updateObjectOnState({ which: 'participant', content: props.participant })
@@ -49,9 +49,9 @@ const ParticipantTiles = (props) => {
                         subheaderTypographyProps={{ variant: 'subheading' }}
                     />
                     <CardContent>
-                        <Typography variant='body1'>Birthday: {moment(birthday).format('DD MMMM YYYY')}</Typography>
+                        <Typography variant='body1'>Camp: {title}</Typography>
                         {/* should be age not birthday... */}
-                        <Typography variant='body1'>email: {email}</Typography>
+                        <Typography variant='body1'>Starting on:  {moment(start_date).format('DD MMMM YYYY')}</Typography>
                         {/* should also include last attend date 
                 *must have attended to be saved... */}
                     </CardContent>

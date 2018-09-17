@@ -7,6 +7,8 @@ export class ThankYou extends Component {
         return (
             <div>
                 Thank You Page
+                Image goes here
+                then a big Registered tile is centered underneath the big THANK YOU FOR REGISTERING
             </div>
         )
     }
