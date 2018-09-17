@@ -2,20 +2,54 @@ import React from 'react'
 import { connect } from "react-redux";
 import { updateObjectOnState } from '../../Ducks/registration';
 
+import {
+    Grid,
+    Card,
+    CardActionArea,
+    CardContent,
+    CardHeader,
+    Typography,
+} from '@material-ui/core';
 
-const FullTiles =(props) => {
-    const{each,which}= props
-    const { first_name, last_name, email, phone} = each
-    let handleSelect=()=>{
-        props.updateObjectOnState({which, content: each })
+
+const FullTiles = (props) => {
+    const { each, which } = props
+    const { first_name, last_name, email, phone } = each
+    let handleSelect = () => {
+        props.updateObjectOnState({ which, content: each })
     }
 
     return (
-        <div className="tiles" id='full-tiles' onClick={() => handleSelect()} >
-            <h2>{`${first_name} ${last_name}`}</h2>
-            <h3>{email}</h3>
-            <h3>{phone}</h3>
-        </div>
+        <Grid item
+            xs={12}
+        //  className="tiles" 
+        //  id='full-tiles' 
+         onClick={() => handleSelect()} >
+            <Card
+                className="tiles"
+                id='p-tiles'
+                onClick={() => handleSelect()}
+                style={{
+                    width: "80vw",
+                }}
+                raised={true}
+            >
+                <CardActionArea>
+                    <CardHeader
+                        style={{ width: "80vw" }}
+                        title={`${first_name}`}
+                        subheader={last_name}
+                        titleTypographyProps={{ variant: 'title' }}
+                        subheaderTypographyProps={{ variant: 'subheading' }}
+                    >
+                    </CardHeader>
+                    <CardContent>
+                        <Typography variant='body1'>Email: {email}</Typography>
+                        <Typography variant='body1'>Phone: {phone}</Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+        </Grid>
     )
 }
 

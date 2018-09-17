@@ -196,7 +196,12 @@ class Part1 extends Component {
             <div>
                 {user.user_id ? (
                     <div>
-                        <Paper>
+                        <Paper
+                            style={{
+                                padding: 15,
+                                margin: '15px 0'
+                            }}
+                        >
                             <Typography
                                 variant='display3'
                                 align='center'
