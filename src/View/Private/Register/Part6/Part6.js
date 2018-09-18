@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+
 import { updateUser, updateNestedObject, updateObjectOnState } from "../../../../Ducks/registration";
 import initialState from '../../../../Ducks/initialState';
 import Payment from '../../../../Components/Payments/Payment';
+import EditUserName from '../../../../Components/EditUserName/EditUserName'
 
 import {
   FormControl,
@@ -35,6 +37,7 @@ class Part6 extends Component {
       medical: false,
       waver: false,
     }
+    // this.updateName = this.updateName.bind(this);
   }
 
   // // // AUTHENTICATION CHECK // // //
@@ -67,7 +70,12 @@ class Part6 extends Component {
   async handleAllThingsAtOnce() {
 
 
-    const { participant, emergency, guardian, attendee } = this.props
+    const {
+      participant,
+      emergency,
+      guardian,
+      attendee
+    } = this.props
     let confirm = await axios.post(`/api/register`, { participant, emergency, guardian, attendee })
     console.log(JSON.stringify(confirm.data));
 
@@ -79,20 +87,20 @@ class Part6 extends Component {
   }
 
   // // // EDIT USERS NAME // // // 
-  handleEdit() {
+  handleEdit = () => {
     this.setState({
       editName: !this.state.editName,
       newName: ''
     })
   }
 
-  updateNewName(e) {
+  updateNewName = (e) => {
     this.setState({
       newName: e.target.value
     })
   }
 
-  handleNameSubmit() {
+  handleNameSubmit = () => {
     axios.put(`/api/user/${this.state.newName}`)
       .then(resp => {
         console.log(resp.data);
@@ -157,6 +165,37 @@ class Part6 extends Component {
                 justify="space-around"
                 alignItems='center'
               >
+                <Grid item xs={12} >
+                  <Typography variant='display2' align='center'>Liability Waver</Typography>
+                </Grid>
+                <Grid item xs={12} >
+                  {attendee.self_register !== 'false' ? (
+                    <div>
+
+                      <Typography variant='headline' align='center'>(If 18 year of age or older)</Typography>
+                      <Typography paragraph align='center'>{`I, ${first_name} ${last_name} (LYR Participant), hereby waive any legal responsibility of any and all counselors, leaders, and organizers for my safety or welfare at the Liber Youth Retreat on August 20-22, 2018.
+I also give permission for the Liber Youth Retreat to use photographs, video, quotations and the first name and initial (e.g. John D.) of me for promotional purposes, including printed and electronic communications.`}</Typography>
+                    </div>
+                  ) : (
+                      <div>
+                        <Typography variant='headline' align='center'>(If under 18 years of age)</Typography>
+                        <Typography paragraph align='center'>{`I, ${userName}* (parent/legal guardian of Liber Youth Retreat registrant ${first_name} ${last_name}), hereby waive any legal responsibility of any and all counselors, leaders, and organizers for my child’s safety or welfare at the Liber Youth Retreat on August 20-22 2018.
+      I also give permission for the Liber Youth Retreat to use photographs, video, quotations and the first name and initial (e.g. John D.) of my child for promotional purposes, including printed and electronic communications.`}</Typography>
+                        {/* <Button
+                          onClick={this.handleEdit}
+                          updateName={this.handleNameSubmit()}
+                        >
+
+                        </Button> */}
+                        <EditUserName
+                          updateName={this.handleNameSubmit}
+                          updateNewName={this.updateNewName}
+                        />
+                      </div>
+                    )}
+
+                </Grid>
+
                 <Grid item xs={12} >
                   <FormGroup>
                     <FormControlLabel

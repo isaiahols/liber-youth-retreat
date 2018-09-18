@@ -26,6 +26,7 @@ import {
   Paper
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import UserSettings from '../../../Components/UserSettings/UserSettings';
 
 
 const styles = theme => ({
@@ -129,6 +130,7 @@ class Dashboard extends Component {
                 </Grid>
               </Paper>
             </section>
+            <UserSettings/>
           </div>
           // get camps and select
 

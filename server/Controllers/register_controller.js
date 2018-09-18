@@ -72,7 +72,7 @@ module.exports = {
         db.deleteUser([user_id])
             .then(resp => {
                 console.log('deleted user');
-
+                req.session.destroy()
                 res.status(200).send('deleted')
             })
             .catch(err => {
