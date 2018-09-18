@@ -38,14 +38,14 @@
 }
 
 .lyr-info-container {
-    background: blue;
+    background: #479761;
     min-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
     padding: 15px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
 }
 
 h2 {

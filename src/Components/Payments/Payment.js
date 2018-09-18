@@ -25,7 +25,7 @@ class Payment extends React.Component {
             <StripeCheckout
                 name="Liber Youth Retreat"
                 description="Camp Registration"
-                image="http://via.placeholder.com/100x100"
+                // image="http://via.placeholder.com/100x100"
                 token={this.onToken}
                 stripeKey={process.env.REACT_APP_STRIPE_KEY}
                 amount={this.state.amount}
