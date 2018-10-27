@@ -241,7 +241,10 @@ class Part2 extends Component {
                             >
                                 <Grid item xs={12}>
 
-                                    <Typography variant='display2'>A Few More Things</Typography>
+                                    <Typography 
+                                        variant='display2'
+                                        align='center'    
+                                    >A Few More Things</Typography>
                                 </Grid>
                                 <Typography variant='headline'>Upload a Photo</Typography>
                                 <Grid item xs={12}>

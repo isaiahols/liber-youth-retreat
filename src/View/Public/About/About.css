@@ -1,12 +1,12 @@
 #about-top-image {
-    background-image: url('../../../assests/images/negative-space-mountain-blue-sky-clouds-jamie-street.jpg');
+    /* background-image: url('../../../assests/images/negative-space-mountain-blue-sky-clouds-jamie-street.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
     min-height: 100vh;
     text-align: center;
-     display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;

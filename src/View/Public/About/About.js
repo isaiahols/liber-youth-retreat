@@ -230,7 +230,7 @@ class About extends Component {
           </Grid>
           <Grid item xs={12}> */}
             <div>
-              <Button onClick={this.handleClickOpen}>Request Additional Info</Button>
+              <Button id='inputing' onClick={this.handleClickOpen}>Request Additional Info</Button>
               <Dialog
                 open={this.state.open}
                 onClose={this.handleClose}

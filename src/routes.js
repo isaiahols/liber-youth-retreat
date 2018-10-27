@@ -23,13 +23,15 @@ import Part6 from "./View/Private/Register/Part6/Part6";
 
 // Error Pages
 import Page404 from './View/ErrorPages/404/404'
+import ComingSoon from './View/ErrorPages/ComingSoon/ComingSoon'
+import NotFound from './View/ErrorPages/404/NotFound';
 
 export default (
     <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/about' component={About} />
-        <Route path='/contact' component={Contact} />
-        <Route path='/legal' component={Legal} />
+        <Route path='/contact' component={ComingSoon} />
+        <Route path='/legal' component={ComingSoon} />
 
         {/* this is private area */}
         <Route path='/user/dashboard' component={UserDashboard} />
@@ -46,7 +48,7 @@ export default (
         <Route path={`/user/register/6`} component={Part6} />
 
         {/* Errors */}
-        <Route path='/' component={Page404} />
+        <Route path='/' component={NotFound} />
 
 
     </Switch>

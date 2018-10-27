@@ -1,0 +1,13 @@
+.a-404-page-container {
+    background-image: url('../../../assests/images/negative-space-book-open-glasses-rustic-table.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}

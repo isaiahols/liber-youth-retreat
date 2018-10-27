@@ -134,6 +134,7 @@ class Part5 extends Component {
             <Grid item sx={12}>
               <Typography
                 variant='display2'
+                align='center'
                 style={{
                   margin: '60px 0'
                 }}

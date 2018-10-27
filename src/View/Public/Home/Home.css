@@ -1,42 +1,64 @@
-.home-page-grid-container {
+.hp-page-grid-container {
 
 }
 
-.top-area{
-    background-image: url('../../../assests//images/sunset-over-snowy-top-of-the-mountain-picjumbo-com.jpg');
+.hp-top-area{
+    /* background-image: url('../../../assests/images/negative-space-stack-antique-books-chris-lawton.jpg'); */
+    background-image: url('https://lh3.googleusercontent.com/vSeVEy19njfqIJwQkESOMv2enATquk7B1yFUQo8wh6niOOFNF2VLO75PHiuiWz3V3uqn06h_gLqp3yEvqxXZZ4d-zm29R9sUjn-KWzGMuXjazTUD0H3JNx8X9TlZVPFyOW935_GVmGC2Si1ycvbf-otTEsESroKMq10ucDT3qM-8GDzY-UaS9VdlMVKFu1AAfuPNcPsB32rqco-4ZrybDor-PkL8YiE092eCIk5p3ddAJiw28uKirgvg-7zzaXxdIZsdGsQMG-p5HMv1tsqXuHYBIeVmLkUOoKQJzitzoE-Uf1CfBS8YwbLrtk9Rm-269976XB70Qi24gwsxlubf6-mC81PXWAnH9V-VdeGSJoDJh3bP-a-27yXNCe3gFq0B19LWfEI8SiKlAxU3lqh20yv9vcIAW_qNXUSFTBdPKqKSqKF1kCErqW3AQSZxlOahgBaTnEjWansNSwwvW1do40IQOmY38HWddUWxzZHQDmEjfuP_JwRJ9LvFobA86SkmgTas_hYu4FUtBkIFemZa3EBvr8QFilUnCcMzmGY5IA9KpupewRZFwbmi3oA6JvzPeA-2YB0Q2TJoYD7pVy7aod_y785I3thZT8h5p4zR1TAdAvCeBMQ1RDLF1y8DG4GoWdGaVlPY-2DEE_AstkDRGqSU-TsL2RQ5hrHStKeVwC97SnPSVEjN2pFwNUHKJQU-_3qSxP6e5KHp-aWl5Q=w2114-h1408-no');
+    background-color: rgb(95, 95, 95);
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     background-position: center; 
-    min-height: 100vh;
+    background-blend-mode: overlay;
+    min-height: 95vh;
     text-align: center;
-    color: #fff;
+    color: rgb(0, 0, 0);
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
 }
 
-.top-area-content {
-    background: rgba(177, 159, 3, .2);
-    /* width: 90vw; */
+.hp-top-area-content {
+    /* background: rgba(177, 159, 3, .5); */
+    /* width: 80vw; */
     min-height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 20px;
+    /* margin-top: 170px; */
+    margin-top: 24vh;
+    color: white;
 }
 
-.top-area h1 {
-    font-size: 2.8em;
+.hp-top-area h1 {
+    font-size: 4.8em;
 }
 
-.top-area h3 {
+.hp-top-area h3 {
     margin-top: 10px;
-    font-size: 1.8;
+    font-size: 1.7em;
     
 }
 
+.hp-top-area button{
+    font-size: 1.9em;
+    width: 60%;
+    height: 50px;
+    margin-top: 20px;
+    background: #479761;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 3px 32px 5px;
+    text-decoration: none;
+    transition: 0.3s;
+    /* margin: 4px 2px; */
+}
+
+/* Below the main page */
 .lyr-info-container {
     background: #479761;
     min-height: 300px;
@@ -47,11 +69,11 @@
     padding: 15px;
     /* border: 2px solid black; */
 }
-
+/* 
 h2 {
     margin-top: 10px;
     font-size: 40px;
-}
+} */
 
 p {
     margin: 20px 0;
@@ -76,8 +98,8 @@ img {
     grid-template-rows: auto;
     grid-template-areas: 
         "title title"
-        "text photo"
         "text photo";
+        /* "text photo"; */
     /* align-items: flex-end; */
     background: pink;
     /* float: right; */
@@ -92,4 +114,23 @@ img {
  }
  #tile-middle-photo {
     grid-area: 'photo';
+ }
+
+
+ @media (min-width: 480px) and (min-height: 680px){
+    .hp-top-area{
+        height: 100vh;
+    }
+
+     .hp-top-area-content{
+        width: 800px;
+     }
+
+     .hp-top-area button{
+        max-width: 300px;
+        margin-top: 100px;
+        font-size: 2.2em;
+        height: 60px;
+        padding: 5px 32px;
+     }
  }
